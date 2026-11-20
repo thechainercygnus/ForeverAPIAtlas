@@ -1,6 +1,8 @@
 // API coverage view: for each normalized field, the call that supplies it and the states it came
 // back in (decided in #18: the Character Planner tracks progress; the atlas tracks the API).
 import {compareProfiles,coverageOf,STATES,KINDS} from './compare.mjs';
+import {itemFromLink,readableLinks} from './items.mjs';
+window.Atlas.readableLinks=readableLinks; // for character.js's call summaries
 const el=s=>document.querySelector(s);
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const titles={identity:'Identity',stats:'Stats & experience',equipment:'Equipment',professions:'Learned professions',spells:'Spellbook entries',quests:'Quest log',reputation:'Reputation'};
@@ -19,8 +21,12 @@ function option(s){return `<option value="${html(s.snapshotId)}">${html(s.name)}
 // Each button's accessible name says which record it opens, since there are many of them.
 function refButton(observation,snapshotId,label){return observation.evidence.length?`<button type="button" class="evidence-link" data-snapshot="${html(snapshotId)}" data-query="${observation.evidence[0].queryIndex}" aria-label="Evidence for ${html(label)}">Evidence ↗</button>`:'<span class="muted">No query</span>';}
 function entryLabel(section,id){
- if(section==='equipment')return slots[Number(id)]||'Slot '+id;
  const f=current.sections[section].entries[id]?.fields||{};
+ if(section==='equipment'){
+  // "Hands · Outfitter Gloves (11192)": the item's name comes from its link, the raw link stays in the evidence.
+  const slot=slots[Number(id)]||'Slot '+id,item=f.link?.state==='value'?itemFromLink(f.link.value):null;
+  return item?`${slot} · ${item.name} (${item.id})`:f.itemID?.state==='value'?`${slot} · item ${f.itemID.value}`:slot;
+ }
  const name=f.name||f.title;return name?.state==='value'?`${name.value} · ${id}`:id;
 }
 const chips=(states,always=false)=>`<span class="states">${STATES.filter(s=>states[s]).map(s=>`<span class="state-label state-${s}">${html(stateNames[s])}${always||states[s]>1?` ×${states[s]}`:''}</span>`).join('')}</span>`;

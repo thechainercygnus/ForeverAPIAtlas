@@ -18,7 +18,7 @@ function resultText(q){
  if(!q.returns.length)return 'no values';
  // Tables show their first fields (key=value), since the field names are what API research needs.
  const brief=n=>n.type==='table'&&!n.restricted&&!n.truncated?`{${(n.entries||[]).slice(0,4).map(e=>`${publicValue(e.key)??typed(e.key)}=${e.value.type==='table'?'{…}':typed(e.value)}`).join(', ')}${(n.entries?.length||0)>4?', …':''}}`:typed(n);
- const text=q.returns.map(brief).join(', ');
+ const text=window.Atlas.readableLinks?.(q.returns.map(brief).join(', '))??q.returns.map(brief).join(', ');
  return text.length>160?text.slice(0,157)+'…':text;
 }
 function outcome(q){return q.hasRestrictedValues?['RESTRICTED','value']:[q.status.toUpperCase(),q.status==='ok'?'':'other'];}
