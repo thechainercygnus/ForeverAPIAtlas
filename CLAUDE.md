@@ -20,9 +20,26 @@ node --test test_compare.mjs
 python test_import_dump.py
 ```
 
-`test_profiles.py` imports `jsonschema` from `../ForeverAPIExplorer/.test-deps`.
-`test_import_dump.py` needs real dumps in `../ForeverAPIExplorer/data/` (local only) and
-fails without them; report that rather than changing the test.
+`test_profiles.py` imports `jsonschema` from `../ForeverAPIExplorer/.test-deps` when that
+folder exists, else from the installed package. `test_import_dump.py`'s real-dump test needs
+dumps in `../ForeverAPIExplorer/data/` (local only) and skips without them; report the skip
+rather than treating it as a pass.
+
+## CI
+
+GitHub Actions in `.github/workflows/`, on pushes to `main` and on pull requests:
+
+- `ci` / `secret-scan`: gitleaks over the full history.
+- `ci` / `test`: the three test commands above, with `jsonschema` pip-installed (pinned
+  version) and the real-dump test skipped.
+- `codeql`: advanced setup for `actions`, `python` and `javascript-typescript` (also weekly);
+  GitHub's default CodeQL setup must stay off.
+- `dependency-review`: fails a PR that adds a dependency with a high or critical
+  vulnerability or a non-permissive license (`.github/dependency-review-config.yml`).
+
+Actions are pinned to full commit SHAs with the version in a comment; Dependabot
+(`.github/dependabot.yml`) updates them weekly. Keep new actions pinned the same way and give
+each job only the permissions it needs.
 
 Import a capture: `python scripts/import_dump.py ../ForeverAPIExplorer/data/<dump>.lua dist/catalog.json`.
 Rebuild all profiles: `python scripts/build_profiles.py ../ForeverAPIExplorer/data dist`.

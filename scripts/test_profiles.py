@@ -7,7 +7,10 @@ from pathlib import Path
 from profiles import normalize, import_snapshot
 
 DIST = Path(__file__).resolve().parents[1] / 'dist'
-sys.path.insert(0, str(DIST.parents[1] / 'ForeverAPIExplorer' / '.test-deps'))
+# Locally, jsonschema lives in the sibling ForeverAPIExplorer checkout; CI pip-installs it.
+TEST_DEPS = DIST.parents[1] / 'ForeverAPIExplorer' / '.test-deps'
+if TEST_DEPS.is_dir():
+    sys.path.insert(0, str(TEST_DEPS))
 from jsonschema import Draft202012Validator
 
 class ProfileTests(unittest.TestCase):
