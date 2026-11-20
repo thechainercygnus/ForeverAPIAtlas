@@ -30,8 +30,9 @@ function detail(){
  if($('#children'))$('#children').onclick=()=>{kind='all';topic='';$('#search').value=r.path;$('#scope').value='all';syncFilters();filter();};
 }
 function syncFilters(){document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.kind===kind));document.querySelectorAll('.topic').forEach(b=>b.classList.toggle('active',b.textContent===topic));$('#topic-note').hidden=!topic;$('#topic-note').textContent=topic+' · Name-based research leads. Behavior and extraction support remain unverified.';}
-function guide(show){$('#guide-panel').hidden=!show;$('#guide').classList.toggle('active',show);$('#explore').classList.toggle('active',!show);if(show)$('#guide-panel').scrollIntoView({behavior:'smooth',block:'start'});}
-$('#guide').onclick=()=>guide(true);$('#learn').onclick=()=>guide(true);$('#explore').onclick=()=>guide(false);
+// The guide is a view like the others; showView (character.js) switches panels and nav state.
+function guide(){showView('guide');$('#guide-panel').scrollIntoView({behavior:'smooth',block:'start'});}
+$('#guide').onclick=guide;$('#learn').onclick=guide;
 $('#search').oninput=filter;$('#scope').onchange=filter;
 $('#prev').onclick=()=>{page--;render();};$('#next').onclick=()=>{page++;render();};
 $('#results').onclick=e=>{const b=e.target.closest('[data-index]');if(b){selected=rows[Number(b.dataset.index)];detail();render();}};
