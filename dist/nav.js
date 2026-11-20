@@ -17,7 +17,8 @@ const Atlas = window.Atlas = {}; // window.Atlas for the profile.js module
 Atlas.handle = (view, fn) => { handlers.set(view, fn); };
 let currentView, appliedHash, started=false;
 Atlas.params = () => new URLSearchParams(location.hash.slice(1));
-Atlas.view = (p=Atlas.params()) => views.has(p.get('view')) ? p.get('view') : 'explorer';
+// The name returned is always one of our own keys, never the URL's text.
+Atlas.view = (p=Atlas.params()) => { const asked=p.get('view'); return [...views.keys()].find(name=>name===asked) ?? 'explorer'; };
 // A link to a state: href(view, {q:'UnitName'}); empty values are left out.
 Atlas.href = (view, state={}) => '#'+new URLSearchParams([['view',view],...Object.entries(state).filter(([,v])=>v!==''&&v!=null).map(([k,v])=>[k,String(v)])]).toString();
 // Merge changes into the current state. push adds a history entry (selections, drill-downs);
@@ -48,7 +49,8 @@ function apply(force=false){
   const panel=$(views.get(view).panel);
   if(!initial&&panel.getBoundingClientRect().top<0)panel.scrollIntoView({block:'start'});
  }
- handlers.get(view)?.(p);
+ const handler=handlers.get(view);
+ if(typeof handler==='function')handler(p);
 }
 addEventListener('hashchange',()=>apply());
 addEventListener('popstate',()=>apply());
