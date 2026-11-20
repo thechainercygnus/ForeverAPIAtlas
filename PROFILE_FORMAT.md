@@ -1,4 +1,4 @@
-# Character profiles and history
+# API coverage, profiles and history
 
 The atlas is file-based and public: its repository includes everything in `dist/`. It stores no database credentials and has no live game connection. Importing a file updates local artifacts; publishing updates the hosted copy.
 
@@ -40,18 +40,29 @@ Evidence references contain a zero-based query index and return index, the funct
 
 Snapshot IDs combine a hash of GUID, capture time and a content digest; filenames contain no raw GUID. The GUID still appears inside the JSON data. Hashing excludes the copied source filename to deduplicate identical captures. Multiple captures in the same second remain distinct if their contents differ. Source dumps stay outside the site checkout.
 
+## Coverage view
+
+The site's API coverage view reads each profile as coverage, not as a character sheet. `coverageOf(profile)` in `dist/compare.mjs` turns a profile into one row per field: a section field such as `stats.xp`, or a collection field pooled across its entries such as `equipment.*.itemID`. Each row has the calls that supplied it (from the evidence `functionPath`s), a count per state, and the individual observations with their evidence. Gameplay values stay in the evidence and are not the headline.
+
+The atlas tracks what the API returns; the Character Planner tracks a character's progress. That split was decided in #18.
+
 ## Comparison semantics
 
-`dist/compare.mjs` provides `compareProfiles(before, after)` and runs in the browser or Node. It rejects different characters, unsupported versions and reversed time order. It produces one row per normalized field:
+`dist/compare.mjs` provides `compareProfiles(before, after)` and runs in the browser or Node. It compares the coverage of any two captures, including different addon versions, client builds and characters; only an unsupported schema version is rejected. Values are never compared: a level-up, more money or an emptied slot is gameplay, not coverage. Collection entries are pooled per field, so two characters compare by what the API returned, not by what each one holds.
 
-- `changed`: both sides have explicit public values/empty results, and the observation changed.
-- `unchanged`: both sides have the same public observation.
-- `newlyObserved`: only the later side has a usable observation. This is coverage, not proof of newly learning a spell or profession.
-- `notComparable`: missing, partial, restricted, unavailable, errored, or otherwise incompatible observations.
+`value` and `empty` both count as returned, and `unavailable` and `error` both count as failed. Each field gets one of:
 
-Different client builds or locales suppress change claims. Missing collection entries are never classified as confirmed removals, completed quests, or unlearned spells. Empty collections and unobserved collections can both have no entries; the enumeration observations and raw evidence distinguish whether a count was actually captured. The profile selector and comparison selectors are independent, so you can inspect one snapshot while comparing another pair.
+- `becameRestricted`: After has restricted observations that Before didn't.
+- `becameUnavailable`: After has unavailable or errored observations that Before didn't.
+- `nowAvailable`: After returned where Before was only restricted, unavailable or errored, or Before's restriction or failure is gone.
+- `newlyCaptured`: only After captured the field. This is coverage, not proof of newly learning a spell or profession.
+- `notCapturedAfter`: only Before captured the field. Missing data is coverage too; it never means removed, completed or unlearned.
+- `otherChange`: another state difference, such as a partial result.
+- `unchanged`: the same states were observed, whatever the values.
 
-Download a comparison from the website or generate the same JSON locally with `node scripts/compare_profiles.mjs before.json after.json comparison.json`. Each comparison row contains both observations with their evidence references. Comparison counts describe fields, not unique gameplay actions. Missing client build or locale also suppresses change claims.
+The result also describes each side (capture, character, addon version, client build and locale) and says whether the character and the build are the same. A different build or locale means a change may come from the client rather than the addon.
+
+Download a comparison from the website or generate the same JSON locally with `node scripts/compare_profiles.mjs before.json after.json comparison.json`. Each row has the field key, its assessment, and each side's state counts and calls. Counts describe fields, not gameplay actions.
 
 ## Validation
 
@@ -62,8 +73,8 @@ node --test scripts/test_compare.mjs
 python ../ForeverAPIExplorer/tests/test_extended_capture.py
 ```
 
-Profile tests use `jsonschema` installed in the sibling ForeverAPIExplorer checkout under `.test-deps`. Lua regression tests use `lupa` there. Fixtures include the actual 0.2.0 and 0.3.0 captures; controlled comparisons cover changed values, missing records, restricted values, zero/false, explicit empty results, character identity, chronology and build differences. Tests do not create invented gameplay records in hosted history.
+Profile tests use `jsonschema` installed in the sibling ForeverAPIExplorer checkout under `.test-deps`. Lua regression tests use `lupa` there. Fixtures include the actual 0.2.0 and 0.3.0 captures; controlled comparisons cover value-only changes, restriction, failure and recovery, fields captured on one side only, partial results, pooling entries across characters, and build differences. Tests do not create invented gameplay records in hosted history.
 
 ## Multi-character captures
 
-History now retains five snapshots across Ett (Human Mage), Lilalx (Dwarf Priest), and Brumboldt (Gnome Warrior). Selecting a profile snapshot also refreshes Character evidence and its download link to that exact capture. Characters with one snapshot have a self-comparison until a second capture is imported. Warrior power is preserved as RAGE; no mana-specific interpretation is applied. All three new exports report zero errors and GetNumSkillLines unavailable.
+History now retains five snapshots across Ett (Human Mage), Lilalx (Dwarf Priest), and Brumboldt (Gnome Warrior). Selecting a profile snapshot also refreshes Character evidence and its download link to that exact capture. A character with one capture is compared with another character's latest capture by default. Warrior power is preserved as RAGE; no mana-specific interpretation is applied. All three new exports report zero errors and GetNumSkillLines unavailable.

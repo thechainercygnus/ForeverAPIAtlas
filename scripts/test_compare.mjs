@@ -1,43 +1,71 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {compareProfiles} from '../dist/compare.mjs';
-const value=v=>({state:'value',value:v,evidence:[]});
-const snapshot=(entries={},fields={})=>({schemaVersion:1,snapshotId:'test',characterGUID:'same',capturedAt:1,client:{build:'1',locale:'enUS'},sections:{stats:{fields,entries:{}},equipment:{fields:{},entries}}});
-test('public level, equipment, skill and quest changes are identified',()=>{
- const a=snapshot({'5':{fields:{itemID:value(123)}}},{level:value(13),rank:value(63),questLevel:value(14)});
- const b=snapshot({'5':{fields:{itemID:value(456)}}},{level:value(14),rank:value(64),questLevel:value(15)});
- assert.equal(compareProfiles(a,b).counts.changed,4);
-});
-test('missing and restricted values never become removals or zeros',()=>{
- const a=snapshot({'5':{fields:{itemID:value(123)}}},{health:value(50),power:{state:'restricted',evidence:[]}});
- const b=snapshot({}, {health:{state:'restricted',evidence:[]},power:value(100)});
+import {compareProfiles,coverageOf} from '../dist/compare.mjs';
+const obs=(state,value)=>state==='value'?{state,value,evidence:[]}:{state,evidence:[]};
+const value=v=>obs('value',v);
+const snapshot=({entries={},fields={},guid='same',build='1',name='Ett'}={})=>({schemaVersion:1,snapshotId:`${guid}-${build}`,characterGUID:guid,capturedAt:1,addonVersion:'0.3.0',client:{build,locale:'enUS'},
+ sections:{identity:{fields:{name:value(name)},entries:{}},stats:{fields,entries:{}},equipment:{fields:{},entries}}});
+const kindOf=(result,key)=>result.rows.find(r=>r.key===key)?.kind;
+
+test('value changes are gameplay, not coverage changes',()=>{
+ const a=snapshot({entries:{'5':{fields:{itemID:value(123)}},'6':{fields:{itemID:value(9)}}},fields:{level:value(13),xp:value(0),flag:value(false)}});
+ const b=snapshot({entries:{'5':{fields:{itemID:value(456)}},'6':{fields:{itemID:obs('empty')}}},fields:{level:value(14),xp:value(10),flag:value(true)}});
  const result=compareProfiles(a,b);
- assert.equal(result.counts.changed,0);assert.equal(result.counts.notComparable,2);assert.equal(result.counts.newlyObserved,1);
+ assert.equal(result.counts.unchanged,result.rows.length);
 });
-test('empty is explicit and distinct from zero and false',()=>{
- const a=snapshot({}, {xp:value(0),flag:value(false),slot:value(1)});
- const b=snapshot({}, {xp:value(0),flag:value(false),slot:{state:'empty',evidence:[]}});
- assert.equal(compareProfiles(a,b).counts.unchanged,2);assert.equal(compareProfiles(a,b).counts.changed,1);
+
+test('restriction, failure and recovery are reported',()=>{
+ const a=snapshot({fields:{health:value(50),power:value(10),xp:obs('error'),mana:obs('restricted'),rested:obs('unavailable')}});
+ const b=snapshot({fields:{health:obs('restricted'),power:obs('unavailable'),xp:value(5),mana:value(3),rested:obs('empty')}});
+ const result=compareProfiles(a,b);
+ assert.equal(kindOf(result,'stats.health'),'becameRestricted');
+ assert.equal(kindOf(result,'stats.power'),'becameUnavailable');
+ for(const key of ['stats.xp','stats.mana','stats.rested'])assert.equal(kindOf(result,key),'nowAvailable',key);
 });
-test('new collection entries are observations, not learning claims',()=>{
- const a=snapshot(),b=snapshot({'1':{fields:{spellID:value(116)}}});
- assert.equal(compareProfiles(a,b).counts.changed,0);assert.equal(compareProfiles(a,b).counts.newlyObserved,1);
+
+test('fields on one side only are newly captured or not captured, never removed',()=>{
+ const a=snapshot({fields:{old:value(1),gone:obs('notCaptured')}}),b=snapshot({fields:{added:value(2),gone:value(3)}});
+ const result=compareProfiles(a,b);
+ assert.equal(kindOf(result,'stats.old'),'notCapturedAfter');
+ assert.equal(kindOf(result,'stats.added'),'newlyCaptured');
+ assert.equal(kindOf(result,'stats.gone'),'newlyCaptured');
+ assert.ok(result.rows.every(r=>!/remov/i.test(r.kind)));
 });
-test('different characters and reverse chronology are rejected; build differences suppress changes',()=>{
- const a=snapshot({}, {xp:value(1)}),b=snapshot({}, {xp:value(2)});
- b.characterGUID='other';assert.throws(()=>compareProfiles(a,b));b.characterGUID='same';
- b.capturedAt=0;assert.throws(()=>compareProfiles(a,b));b.capturedAt=1;b.client.build='2';
- assert.equal(compareProfiles(a,b).counts.changed,0);assert.equal(compareProfiles(a,b).counts.notComparable,1);
+
+test('a partial result is reported as another state change',()=>{
+ const result=compareProfiles(snapshot({fields:{list:value(1)}}),snapshot({fields:{list:obs('partial')}}));
+ assert.equal(kindOf(result,'stats.list'),'otherChange');
 });
-test('real captures distinguish expanded spell coverage and missing quests from gameplay changes',()=>{
+
+test('collection entries pool per field, so different characters compare by coverage',()=>{
+ const a=snapshot({guid:'mage',entries:{'5':{fields:{itemID:value(123)}}}});
+ const b=snapshot({guid:'warrior',name:'Brumboldt',entries:{'7':{fields:{itemID:value(456)}},'9':{fields:{itemID:obs('empty')}}}});
+ const result=compareProfiles(a,b);
+ const row=result.rows.find(r=>r.key==='equipment.*.itemID');
+ assert.deepEqual(row.after.states,{value:1,empty:1});
+ assert.equal(row.kind,'unchanged');
+ assert.equal(result.sameCharacter,false);
+ const [coverage]=coverageOf(b).filter(r=>r.key==='equipment.*.itemID');
+ assert.equal(coverage.collection,true);assert.deepEqual(coverage.observations.map(o=>o.entry),['7','9']);
+});
+
+test('captures from different builds compare, and each side says what it is',()=>{
+ const result=compareProfiles(snapshot({build:'1'}),snapshot({build:'2',guid:'other',name:'Lilalx'}));
+ assert.equal(result.sameBuild,false);
+ assert.deepEqual([result.before.build,result.after.build,result.after.name,result.after.addonVersion],['1','2','Lilalx','0.3.0']);
+ assert.throws(()=>compareProfiles({...snapshot(),schemaVersion:2},snapshot()));
+});
+
+test('real captures: addon 0.3.0 expands coverage and detects restricted values',()=>{
  const root=new URL('../dist/',import.meta.url);
  const history=JSON.parse(readFileSync(new URL('history.json',root)));
  const [a,b]=history.snapshots.map(s=>JSON.parse(readFileSync(new URL(s.profileFile,root))));
+ assert.deepEqual([a.addonVersion,b.addonVersion],['0.2.0','0.3.0']);
  const result=compareProfiles(a,b);
- assert.equal(result.rows.find(r=>r.path==='stats.xp').before.value,9493);
- assert.equal(result.rows.find(r=>r.path==='stats.xp').after.value,10843);
- assert.equal(result.rows.filter(r=>r.path.startsWith('spells.')&&r.kind==='changed').length,0);
- const missingQuests=result.rows.filter(r=>r.path.startsWith('quests.')&&r.after.state==='notCaptured');
- assert.ok(missingQuests.length>0);assert.ok(missingQuests.every(r=>r.kind==='notComparable'));
+ assert.equal(kindOf(result,'stats.health'),'becameRestricted');
+ assert.equal(kindOf(result,'stats.xp'),'unchanged'); // its value changed; its coverage didn't
+ assert.equal(kindOf(result,'reputation.enumeratedLineCount'),'nowAvailable');
+ assert.ok(result.rows.filter(r=>r.key.startsWith('spells.*.')).every(r=>r.kind==='newlyCaptured'));
+ assert.equal(result.counts.notCapturedAfter,0);
 });

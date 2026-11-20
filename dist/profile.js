@@ -1,76 +1,87 @@
-import {compareProfiles} from './compare.mjs';
+// API coverage view: for each normalized field, the call that supplies it and the states it came
+// back in (decided in #18: the Character Planner tracks progress; the atlas tracks the API).
+import {compareProfiles,coverageOf,STATES,KINDS} from './compare.mjs';
 const el=s=>document.querySelector(s);
 const html=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const titles={identity:'Identity',stats:'Stats & experience',equipment:'Equipment',professions:'Learned professions',spells:'Spellbook entries',quests:'Quest log',reputation:'Reputation'};
+const units={equipment:'slot',professions:'profession',spells:'spellbook entry',quests:'quest',reputation:'faction'};
 const slots=['','Head','Neck','Shoulder','Shirt','Chest','Waist','Legs','Feet','Wrists','Hands','Finger 1','Finger 2','Trinket 1','Trinket 2','Back','Main hand','Off hand','Ranged','Tabard'];
-const states={empty:'Empty result',restricted:'Restricted',unavailable:'API unavailable',error:'Query error',notCaptured:'Not captured',partial:'Partial result'};
-const kinds={changed:'Observed change',newlyObserved:'Newly observed',notComparable:'Not comparable',unchanged:'Unchanged'};
+const stateNames={value:'Value',empty:'Empty result',restricted:'Restricted',unavailable:'API unavailable',error:'Query error',partial:'Partial result',notCaptured:'Not captured'};
+const kinds={becameRestricted:'Became restricted',becameUnavailable:'Became unavailable',nowAvailable:'Now available',newlyCaptured:'Newly captured',notCapturedAfter:'Not captured in After',otherChange:'Other state change',unchanged:'Unchanged'};
 const stamp=t=>new Date(t*1000).toLocaleString();
-const display=f=>f?.state==='value'?String(f.value):states[f?.state]||'Not captured';
-let history=[],current,comparison,querySearch='',sectionFilter='',outcome='changed';
+const display=f=>f?.state==='value'?String(f.value):stateNames[f?.state]||'Not captured';
+let history=[],current,comparison,querySearch='',sectionFilter='',stateFilter='',outcome='changes';
 let comparisonRun=0,profileRun=0;
 const profiles=new Map(),raw=new Map();
 async function getJSON(path){const r=await fetch(path);if(!r.ok)throw Error(`Unable to load ${path}`);return r.json();}
 async function profileFor(id){if(!profiles.has(id)){const entry=history.find(s=>s.snapshotId===id);if(!entry)throw Error('Snapshot not found');profiles.set(id,await getJSON(entry.profileFile));}return profiles.get(id);}
 function option(s){return `<option value="${html(s.snapshotId)}">${html(s.name)} · ${html(stamp(s.capturedAt))} · v${html(s.addonVersion)}</option>`;}
-function refButton(field,snapshotId){return field.evidence.length?`<button class="evidence-link" data-snapshot="${html(snapshotId)}" data-query="${field.evidence[0].queryIndex}">Evidence ↗</button>`:'<span class="muted">No query</span>';}
-function label(section,id,entry){
- if(section==='equipment')return `${slots[Number(id)]||'Slot '+id} · ${display(entry.fields.itemID)}`;
- return display(entry.fields.name||entry.fields.title||{state:'value',value:id})+' · '+id;
+// Each button's accessible name says which record it opens, since there are many of them.
+function refButton(observation,snapshotId,label){return observation.evidence.length?`<button type="button" class="evidence-link" data-snapshot="${html(snapshotId)}" data-query="${observation.evidence[0].queryIndex}" aria-label="Evidence for ${html(label)}">Evidence ↗</button>`:'<span class="muted">No query</span>';}
+function entryLabel(section,id){
+ if(section==='equipment')return slots[Number(id)]||'Slot '+id;
+ const f=current.sections[section].entries[id]?.fields||{};
+ const name=f.name||f.title;return name?.state==='value'?`${name.value} · ${id}`:id;
 }
+const chips=(states,always=false)=>`<span class="states">${STATES.filter(s=>states[s]).map(s=>`<span class="state-label state-${s}">${html(stateNames[s])}${always||states[s]>1?` ×${states[s]}`:''}</span>`).join('')}</span>`;
 function renderProfile(){
- const id=current.sections.identity.fields,stats=current.sections.stats.fields;
+ const id=current.sections.identity.fields;
  el('#profile-title').textContent=`${display(id.name)} · Level ${display(id.level)} ${display(id.race)} ${display(id.class)}`;
  el('#profile-meta').textContent=`${stamp(current.capturedAt)} · addon ${current.addonVersion} · build ${current.client.build} · ${current.source}`;
  el('#profile-download').href=history.find(s=>s.snapshotId===current.snapshotId).profileFile;
- const selected=sectionFilter?{[sectionFilter]:current.sections[sectionFilter]}:current.sections;
- el('#profile-stats').innerHTML=[['XP',stats.xp],['Maximum health',stats.maxHealth],['Current health',stats.health],['Money (copper)',stats.moneyCopper]].map(([label,f])=>`<div class="metric"><label>${html(label)}</label><strong>${html(display(f))}</strong></div>`).join('');
- let count=0;
- el('#profile-sections').innerHTML=Object.entries(selected).map(([section,data])=>{
-  const groups=[];
-  if(Object.keys(data.fields).length)groups.push({title:titles[section],fields:data.fields});
-  for(const [id,entry] of Object.entries(data.entries))groups.push({title:label(section,id,entry),fields:entry.fields});
-  const rows=groups.map(group=>{
-   const fields=Object.entries(group.fields).filter(([key,f])=>!querySearch||`${section} ${group.title} ${key} ${display(f)}`.toLowerCase().includes(querySearch));
-   count+=fields.length;
-   return fields.length?`<tr class="group-row"><th colspan="4">${html(group.title)}</th></tr>${fields.map(([key,f])=>`<tr><td>${html(key)}</td><td class="value-cell">${html(display(f))}</td><td><span class="state-label">${html(f.state)}</span></td><td>${refButton(f,current.snapshotId)}</td></tr>`).join('')}`:'';
+ const rows=coverageOf(current),totals={};
+ for(const r of rows)for(const [s,n] of Object.entries(r.states))totals[s]=(totals[s]||0)+n;
+ el('#profile-states').innerHTML=STATES.filter(s=>totals[s]).map(s=>`<div class="metric"><label>${html(stateNames[s])}</label><strong>${totals[s]}</strong><small>field observations</small></div>`).join('');
+ const visible=rows.filter(r=>(!sectionFilter||r.section===sectionFilter)&&(!stateFilter||r.states[stateFilter])&&(!querySearch||`${r.key} ${r.calls.join(' ')} ${titles[r.section]}`.toLowerCase().includes(querySearch)));
+ el('#profile-sections').innerHTML=Object.keys(titles).map(section=>{
+  const list=visible.filter(r=>r.section===section);
+  if(!list.length)return '';
+  const body=list.map(r=>{
+   const n=r.observations.length,label=`${titles[section]} ${r.field}`;
+   const source=r.collection?`<details class="entries"><summary>${n} ${n===1?'entry':'entries'}</summary><ul>${r.observations.map(o=>`<li><span>${html(entryLabel(section,o.entry))}</span><span class="state-label">${html(stateNames[o.state])}</span>${refButton(o,current.snapshotId,`${label}, ${entryLabel(section,o.entry)}`)}</li>`).join('')}</ul></details>`:refButton(r.observations[0],current.snapshotId,label);
+   return `<tr><th scope="row"><code>${html(r.field)}</code>${r.collection?`<small>per ${html(units[section]||'entry')} · ${n} captured</small>`:''}</th><td><code class="calls-cell">${r.calls.map(c=>html(c.replace(/^_G\./,''))).join('<br>')||'<span class="muted">none</span>'}</code></td><td>${chips(r.states,r.collection)}</td><td>${source}</td></tr>`;
   }).join('');
-  return `<details class="profile-section" ${section==='identity'||sectionFilter||querySearch?'open':''}><summary>${html(titles[section])} · observed coverage</summary>${rows?`<div class="table-scroll"><table><thead><tr><th>Field</th><th>Observed value</th><th>State</th><th>Source</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p class="detail-note">No matching fields were captured. Missing entries do not establish an empty collection.</p>'}</details>`;
- }).join('');
- el('#profile-field-count').textContent=count+' matching fields';
+  return `<details class="profile-section" open><summary>${html(titles[section])} · ${list.length} ${list.length===1?'field':'fields'}</summary><div class="table-scroll"><table><thead><tr><th scope="col">Field</th><th scope="col">Supplied by</th><th scope="col">States</th><th scope="col">Evidence</th></tr></thead><tbody>${body}</tbody></table></div></details>`;
+ }).join('')||'<p class="empty">No fields match. Clear the search or change the section or state.</p>';
+ el('#profile-field-count').textContent=`${visible.length} of ${rows.length} fields`;
 }
-function valueCell(f,snapshotId){return `<span>${html(display(f))}</span><br>${refButton(f,snapshotId)}`;}
+const sideText=s=>`${s.name??'Unknown character'} · addon ${s.addonVersion} · build ${s.build??'?'} · ${stamp(s.capturedAt)}`;
 async function renderComparison(){
  const run=++comparisonRun;
  try{
   const before=await profileFor(el('#compare-before').value),after=await profileFor(el('#compare-after').value);
   if(run!==comparisonRun)return;
   comparison=compareProfiles(before,after);
-  el('#comparison-export').disabled=false;
-  el('#comparison-error').textContent=comparison.compatibleBuild?'':'Build or locale differs: changed values are not comparable.';
-  el('#comparison-counts').innerHTML=Object.entries(comparison.counts).map(([kind,count])=>`<div class="metric"><label>${html(kinds[kind])}</label><strong>${count}</strong></div>`).join('');
-  const rows=comparison.rows.filter(r=>(!outcome||r.kind===outcome)&&(!querySearch||`${r.path} ${display(r.before)} ${display(r.after)}`.toLowerCase().includes(querySearch)));
-  el('#comparison-results').innerHTML=rows.length?`<div class="table-scroll"><table><thead><tr><th>Field</th><th>Before</th><th>After</th><th>Assessment</th></tr></thead><tbody>${rows.map(r=>`<tr><td class="path-cell">${html(r.path)}</td><td>${valueCell(r.before,before.snapshotId)}</td><td>${valueCell(r.after,after.snapshotId)}</td><td>${html(kinds[r.kind])}</td></tr>`).join('')}</tbody></table></div>`:'<p class="empty">No fields match this assessment. Choose another outcome or clear the search.</p>';
- }catch(e){if(run!==comparisonRun)return;comparison=null;el('#comparison-export').disabled=true;el('#comparison-error').textContent=e.message;el('#comparison-results').innerHTML='';el('#comparison-counts').innerHTML='';}
+  el('#comparison-export').disabled=false;el('#comparison-error').textContent='';
+  el('#comparison-sides').textContent=`Before: ${sideText(comparison.before)}. After: ${sideText(comparison.after)}.`+
+   (comparison.sameBuild?'':' Different client builds or locales: a change may come from the client, not the addon.')+
+   (comparison.sameCharacter?'':' Different characters: entries are pooled per field, so this compares what the API returned, not what each character holds.');
+  el('#comparison-counts').innerHTML=KINDS.filter(k=>comparison.counts[k]).map(k=>`<div class="metric"><label>${html(kinds[k])}</label><strong>${comparison.counts[k]}</strong></div>`).join('');
+  const rows=comparison.rows.filter(r=>(outcome==='changes'?r.kind!=='unchanged':!outcome||r.kind===outcome)&&(!sectionFilter||r.key.startsWith(sectionFilter+'.'))&&(!querySearch||`${r.key} ${[...(r.before?.calls||[]),...(r.after?.calls||[])].join(' ')}`.toLowerCase().includes(querySearch)));
+  const cell=s=>s?chips(s.states):'<span class="muted">Not captured</span>';
+  el('#comparison-results').innerHTML=rows.length?`<div class="table-scroll"><table><thead><tr><th scope="col">Field</th><th scope="col">Before</th><th scope="col">After</th><th scope="col">Assessment</th></tr></thead><tbody>${rows.map(r=>`<tr><th scope="row" class="path-cell">${html(r.key)}<small>${html([...new Set([...(r.before?.calls||[]),...(r.after?.calls||[])])].map(c=>c.replace(/^_G\./,'')).join(', '))}</small></th><td>${cell(r.before)}</td><td>${cell(r.after)}</td><td>${html(kinds[r.kind])}</td></tr>`).join('')}</tbody></table></div>`:`<p class="empty">${outcome==='changes'?'No coverage changes between these captures.':'No fields match this assessment. Choose another or clear the search.'}</p>`;
+ }catch(e){if(run!==comparisonRun)return;comparison=null;el('#comparison-export').disabled=true;el('#comparison-error').textContent=e.message;el('#comparison-results').innerHTML='';el('#comparison-counts').innerHTML='';el('#comparison-sides').textContent='';}
 }
 async function openEvidence(button){
  const dialog=el('#profile-evidence');el('#profile-evidence-body').textContent='Loading source query…';dialog.showModal();
  try{const p=await profileFor(button.dataset.snapshot);if(!raw.has(p.snapshotId))raw.set(p.snapshotId,await getJSON(p.evidenceFile));const q=raw.get(p.snapshotId).queries[Number(button.dataset.query)];el('#profile-evidence-body').textContent=JSON.stringify({snapshot:p.snapshotId,source:p.source,query:q},null,2);}
  catch(e){el('#profile-evidence-body').textContent=e.message;}
 }
+// The comparison can pair any two captures; it defaults to this character's previous capture,
+// or the latest capture of another character when this one has only one.
 function updateSelectors(){
  const guid=el('#profile-character').value;
- const list=history.filter(s=>s.characterGUID===guid).sort((a,b)=>a.capturedAt-b.capturedAt);
+ const all=[...history].sort((a,b)=>a.capturedAt-b.capturedAt),list=all.filter(s=>s.characterGUID===guid);
  el('#profile-snapshot').innerHTML=[...list].reverse().map(option).join('');
- el('#compare-before').innerHTML=list.map(option).join('');el('#compare-after').innerHTML=list.map(option).join('');
- el('#compare-before').value=list.length>1?list[list.length-2].snapshotId:list[0].snapshotId;
- el('#compare-after').value=list.at(-1).snapshotId;
- el('#history-note').textContent=`${list.length} retained snapshots for this character. ${list.length===1?'Only one capture is available; the comparison currently shows this capture on both sides. ':''}Times use your browser timezone. Character evidence follows the selected profile snapshot.`;
+ el('#compare-before').innerHTML=all.map(option).join('');el('#compare-after').innerHTML=all.map(option).join('');
+ const before=list.length>1?list.at(-2):all.filter(s=>s.characterGUID!==guid).at(-1)||list[0];
+ el('#compare-before').value=before.snapshotId;el('#compare-after').value=list.at(-1).snapshotId;
+ el('#history-note').textContent=`${list.length} ${list.length===1?'capture':'captures'} of this character, ${history.length} in total. Times use your browser timezone. Character evidence follows the selected capture.`;
  return list.at(-1).snapshotId;
 }
 async function choose(id){const run=++profileRun;try{const loaded=await profileFor(id);if(run!==profileRun)return;current=loaded;el('#profile-error').textContent='';renderProfile();setTitle();window.loadCharacter(loaded.evidenceFile);await renderComparison();}catch(e){if(run===profileRun)el('#profile-error').textContent=e.message;}}
 function setTitle(){if(current&&window.Atlas.view()==='profile')window.Atlas.title(display(current.sections.identity.fields.name));}
-// The profile view's state (snapshot, search, section) lives in the URL; see nav.js.
+// The coverage view's state (snapshot, search, section, state) lives in the URL; see nav.js.
 function profileView(p){
  if(!history.length||!el('#profile-character'))return;
  const latest=guid=>history.filter(s=>s.characterGUID===guid).sort((a,b)=>a.capturedAt-b.capturedAt).at(-1);
@@ -78,25 +89,28 @@ function profileView(p){
  if(el('#profile-character').value!==entry.characterGUID){el('#profile-character').value=entry.characterGUID;updateSelectors();}
  el('#profile-snapshot').value=entry.snapshotId;
  const search=p.get('search')||'';if(el('#profile-search').value!==search)el('#profile-search').value=search;
- querySearch=search.trim().toLowerCase();sectionFilter=Object.hasOwn(titles,p.get('section')??'')?p.get('section'):'';el('#profile-section').value=sectionFilter;
+ querySearch=search.trim().toLowerCase();
+ sectionFilter=Object.hasOwn(titles,p.get('section')??'')?p.get('section'):'';el('#profile-section').value=sectionFilter;
+ stateFilter=STATES.find(s=>s===p.get('state'))??'';el('#profile-state').value=stateFilter;
  if(current?.snapshotId!==entry.snapshotId)choose(entry.snapshotId);else{renderProfile();renderComparison();setTitle();}
 }
 window.Atlas.handle('profile',profileView);
 async function init(){try{
  const result=await getJSON('history.json');if(result.schemaVersion!==1)throw Error('Unsupported history schema');history=result.snapshots;
- if(!history.length){el('#profile-panel').innerHTML='<p class="empty">No character history yet. Import a character capture to build a profile.</p>';return;}
+ if(!history.length){el('#profile-panel').innerHTML='<p class="empty">No captures yet. Import a character capture to map API coverage.</p>';return;}
  const characters=[...new Map(history.map(s=>[s.characterGUID,s])).values()];
- el('#profile-panel').innerHTML=`<div class="evidence-heading"><div><div class="eyebrow">YOUR CHARACTER / SNAPSHOT HISTORY</div><h2>Character profile</h2></div><div class="profile-actions"><a class="download" id="profile-download" download>↓ Profile JSON</a><a class="download" href="profile.schema.json" download>Schema v1</a></div></div><div class="toolbar"><div class="field grow"><label for="profile-character">Character</label><select id="profile-character">${characters.map(s=>`<option value="${html(s.characterGUID)}">${html(s.name)} · ${html(s.characterGUID)}</option>`).join('')}</select></div><div class="field grow"><label for="profile-snapshot">Snapshot</label><select id="profile-snapshot"></select></div></div><p id="history-note" class="detail-note"></p><h2 id="profile-title"></h2><p id="profile-meta" class="detail-note"></p><div class="metrics" id="profile-stats"></div><div class="warning"><span>△</span><div><strong>Observed data with explicit gaps</strong><p>Restricted, unavailable, partial and missing values remain distinct. Missing collection entries never prove removals.</p></div></div><p class="detail-note" id="profile-error" role="alert"></p><div class="toolbar"><div class="field grow"><label for="profile-search">Search profile and comparison</label><div class="search"><span aria-hidden="true">⌕</span><input type="search" id="profile-search" placeholder="e.g. an item ID, a spell, or a value"></div></div><div class="field"><label for="profile-section">Section</label><select id="profile-section"><option value="">All sections</option>${Object.entries(titles).map(([k,v])=>`<option value="${k}">${html(v)}</option>`).join('')}</select></div></div><p class="muted" id="profile-field-count"></p><div id="profile-sections"></div><details class="profile-section" id="comparison-panel"><summary>Compare snapshots</summary><p class="detail-note">Changes compare public values captured in both snapshots. Newly observed fields indicate expanded coverage, not newly learned abilities. Empty results describe observations, not confirmed gameplay actions. Different builds or locales suppress change claims.</p><div class="toolbar"><div class="field grow"><label for="compare-before">Before</label><select id="compare-before"></select></div><div class="field grow"><label for="compare-after">After</label><select id="compare-after"></select></div></div><p id="comparison-error" class="detail-note" role="alert"></p><div class="metrics" id="comparison-counts"></div><div class="field"><label for="comparison-outcome">Assessment</label><select id="comparison-outcome">${Object.entries(kinds).map(([k,v])=>`<option value="${k}">${html(v)}</option>`).join('')}<option value="">All assessments</option></select></div><button id="comparison-export" class="copy" disabled>Download comparison JSON</button><div id="comparison-results" aria-live="polite"></div></details><dialog id="profile-evidence"><button class="copy" id="close-profile-evidence">Close evidence</button><h2>Source query</h2><pre id="profile-evidence-body"></pre></dialog>`;
+ el('#profile-panel').innerHTML=`<div class="evidence-heading"><div><div class="eyebrow">API COVERAGE / CAPTURE HISTORY</div><h2>API coverage</h2></div><div class="profile-actions"><a class="download" id="profile-download" download>↓ Profile JSON</a><a class="download" href="profile.schema.json" download>Schema v1</a></div></div><p class="detail-note">Each row is a field the importer normalizes from a character capture: the call that supplies it and the states it came back in. Collection fields, such as equipment slots and spells, are counted across their entries. Values are in each field's evidence.</p><div class="toolbar"><div class="field grow"><label for="profile-character">Character</label><select id="profile-character">${characters.map(s=>`<option value="${html(s.characterGUID)}">${html(s.name)} · ${html(s.characterGUID)}</option>`).join('')}</select></div><div class="field grow"><label for="profile-snapshot">Capture</label><select id="profile-snapshot"></select></div></div><p id="history-note" class="detail-note"></p><h2 id="profile-title"></h2><p id="profile-meta" class="detail-note"></p><div class="metrics" id="profile-states"></div><div class="warning"><span>△</span><div><strong>Observed data with explicit gaps</strong><p>Restricted, unavailable, partial and missing values remain distinct. Missing collection entries never prove removals.</p></div></div><p class="detail-note" id="profile-error" role="alert"></p><div class="toolbar"><div class="field grow"><label for="profile-search">Search fields and calls</label><div class="search"><span aria-hidden="true">⌕</span><input type="search" id="profile-search" placeholder="e.g. itemID or GetInventoryItemID"></div></div><div class="field"><label for="profile-section">Section</label><select id="profile-section"><option value="">All sections</option>${Object.entries(titles).map(([k,v])=>`<option value="${k}">${html(v)}</option>`).join('')}</select></div><div class="field"><label for="profile-state">State</label><select id="profile-state"><option value="">All states</option>${STATES.map(s=>`<option value="${s}">${html(stateNames[s])}</option>`).join('')}</select></div></div><p class="muted" id="profile-field-count"></p><div id="profile-sections"></div><details class="profile-section" id="comparison-panel"><summary>Compare coverage between captures</summary><p class="detail-note">Compares which fields each capture returned and in what state, across captures, addon versions, client builds and characters. Value changes, such as a level-up, aren't coverage and aren't reported. A field missing from one side is "not captured", never "removed".</p><div class="toolbar"><div class="field grow"><label for="compare-before">Before</label><select id="compare-before"></select></div><div class="field grow"><label for="compare-after">After</label><select id="compare-after"></select></div></div><p id="comparison-sides" class="detail-note"></p><p id="comparison-error" class="detail-note" role="alert"></p><div class="metrics" id="comparison-counts"></div><div class="field"><label for="comparison-outcome">Assessment</label><select id="comparison-outcome"><option value="changes">All changes</option>${KINDS.map(k=>`<option value="${k}">${html(kinds[k])}</option>`).join('')}<option value="">All fields</option></select></div><button type="button" id="comparison-export" class="copy" disabled>Download comparison JSON</button><div id="comparison-results"></div></details><dialog id="profile-evidence"><button class="copy" id="close-profile-evidence">Close evidence</button><h2>Source query</h2><pre id="profile-evidence-body"></pre></dialog>`;
  el('#profile-character').onchange=()=>window.Atlas.set({snapshot:updateSelectors()},{push:true});
  el('#profile-snapshot').onchange=()=>window.Atlas.set({snapshot:el('#profile-snapshot').value},{push:true});
  el('#profile-search').oninput=()=>window.Atlas.set({search:el('#profile-search').value});
  el('#profile-section').onchange=()=>window.Atlas.set({section:el('#profile-section').value});
- el('#comparison-export').onclick=()=>{if(!comparison)return;const url=URL.createObjectURL(new Blob([JSON.stringify(comparison,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='forever-character-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+ el('#profile-state').onchange=()=>window.Atlas.set({state:el('#profile-state').value});
+ el('#comparison-export').onclick=()=>{if(!comparison)return;const url=URL.createObjectURL(new Blob([JSON.stringify(comparison,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='forever-coverage-comparison.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
  el('#compare-before').onchange=renderComparison;el('#compare-after').onchange=renderComparison;
  el('#comparison-outcome').onchange=()=>{outcome=el('#comparison-outcome').value;renderComparison();};
  el('#profile-panel').onclick=e=>{const b=e.target.closest('[data-query]');if(b)openEvidence(b);};
  el('#close-profile-evidence').onclick=()=>el('#profile-evidence').close();
  await choose(updateSelectors());
  window.Atlas.refresh();
- }catch(e){el('#profile-panel').innerHTML=`<p class="empty">Unable to load character history: ${html(e.message)}. Character evidence and Symbol explorer remain available.</p>`;}}
+ }catch(e){el('#profile-panel').innerHTML=`<p class="empty">Unable to load capture history: ${html(e.message)}. Character evidence and Symbol explorer remain available.</p>`;}}
 init();

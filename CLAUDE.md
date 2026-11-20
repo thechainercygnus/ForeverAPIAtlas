@@ -5,10 +5,14 @@ Instructions for AI coding agents working in this repo.
 ## What this is
 
 A public, buildless static site (`dist/`) that browses ForeverAPIExplorer captures: the
-Lua environment catalog, typed character evidence, normalized character profiles and
-snapshot comparisons. Python scripts in `scripts/` import captures into `dist/`; the
-front end is plain JS (`dist/*.js`, `dist/compare.mjs`). `PROFILE_FORMAT.md` and
-`dist/profile.schema.json` define the profile contract.
+Lua environment catalog, typed character evidence, and an API coverage map built from
+normalized character profiles (which call supplies each field, and in what state), with
+coverage comparisons between captures. Python scripts in `scripts/` import captures into
+`dist/`; the front end is plain JS (`dist/*.js`, `dist/compare.mjs`). `PROFILE_FORMAT.md`
+and `dist/profile.schema.json` define the profile contract.
+
+The atlas maps what the API returns; it doesn't track a character's progress, which is the
+Character Planner's job (#18). Don't add progress or value-change features here.
 
 ## Commands
 
