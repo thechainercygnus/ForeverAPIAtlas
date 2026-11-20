@@ -38,7 +38,7 @@ function evidenceView(p){
  evidenceRender();
  Atlas.title(evidenceSelected?evidenceSelected.path.replace(/^_G\./,''):'');
 }
-Atlas.handlers.evidence=evidenceView;
+Atlas.handle('evidence',evidenceView);
 function evidenceRender(){
  $('#evidence-count').textContent=evidenceMatches.length+' calls';
  const visible=evidenceMatches.slice(evidencePage*evidenceSize,(evidencePage+1)*evidenceSize);

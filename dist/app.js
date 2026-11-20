@@ -7,7 +7,7 @@ const short=path=>path.replace(/^_G\./,'');
 const parentOf=path=>path.match(/^(.+?)(?:\.[A-Za-z_]\w*|\[[^\]]*\])$/)?.[1]??'';
 const lastSegment=path=>path.slice(parentOf(path).length).replace(/^\./,'')||path;
 // The explorer's current state, read from the URL.
-function state(p){return {q:p.get('q')||'',kind:p.get('kind')||'all',scope:p.get('scope')||'all',topic:topics[p.get('topic')]?p.get('topic'):'',under:byPath.has(p.get('under'))?p.get('under'):'',page:Math.max(0,Number(p.get('page'))||0),symbol:p.get('symbol')||''};}
+function state(p){return {q:p.get('q')||'',kind:p.get('kind')||'all',scope:p.get('scope')||'all',topic:Object.hasOwn(topics,p.get('topic')??'')?p.get('topic'):'',under:byPath.has(p.get('under'))?p.get('under'):'',page:Math.max(0,Number(p.get('page'))||0),symbol:p.get('symbol')||''};}
 // A link to this view with some state changed; selection links keep the filters and page.
 function link(changes){const p=Atlas.params(),s={q:p.get('q'),kind:p.get('kind'),scope:p.get('scope'),topic:p.get('topic'),under:p.get('under'),page:p.get('page'),symbol:p.get('symbol'),...changes};return Atlas.href('explorer',s);}
 // Browsing a table lists its direct children; searching while browsing looks through all its descendants.
@@ -32,7 +32,7 @@ function explorer(p){
  breadcrumbs(s.under);render();detail();
  Atlas.title(selected?short(selected.path):s.under?short(s.under):'');
 }
-Atlas.handlers.explorer=explorer;
+Atlas.handle('explorer',explorer);
 function breadcrumbs(under){
  if(!under){$('#browse').innerHTML=`<p class="muted">Searching all paths · <a href="${esc(Atlas.href('explorer',{under:'_G'}))}">Browse from _G</a> or open a table's children from its detail.</p>`;return;}
  const trail=[];for(let p=under;p;p=parentOf(p))trail.unshift(p);

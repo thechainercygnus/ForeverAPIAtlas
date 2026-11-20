@@ -78,10 +78,10 @@ function profileView(p){
  if(el('#profile-character').value!==entry.characterGUID){el('#profile-character').value=entry.characterGUID;updateSelectors();}
  el('#profile-snapshot').value=entry.snapshotId;
  const search=p.get('search')||'';if(el('#profile-search').value!==search)el('#profile-search').value=search;
- querySearch=search.trim().toLowerCase();sectionFilter=p.get('section')||'';el('#profile-section').value=sectionFilter;
+ querySearch=search.trim().toLowerCase();sectionFilter=Object.hasOwn(titles,p.get('section')??'')?p.get('section'):'';el('#profile-section').value=sectionFilter;
  if(current?.snapshotId!==entry.snapshotId)choose(entry.snapshotId);else{renderProfile();renderComparison();setTitle();}
 }
-window.Atlas.handlers.profile=profileView;
+window.Atlas.handle('profile',profileView);
 async function init(){try{
  const result=await getJSON('history.json');if(result.schemaVersion!==1)throw Error('Unsupported history schema');history=result.snapshots;
  if(!history.length){el('#profile-panel').innerHTML='<p class="empty">No character history yet. Import a character capture to build a profile.</p>';return;}
