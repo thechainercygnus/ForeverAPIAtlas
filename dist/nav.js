@@ -9,7 +9,7 @@ const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const views = new Map([
  ['explorer',{panel:'#environment-panel',title:'Symbol explorer'}],
  ['evidence',{panel:'#character-panel',title:'Character evidence'}],
- ['profile',{panel:'#profile-panel',title:'Character profile'}],
+ ['profile',{panel:'#profile-panel',title:'API coverage'}],
  ['guide',{panel:'#guide-panel',title:'Reading the snapshot'}],
 ]);
 const handlers = new Map();
