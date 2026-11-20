@@ -63,6 +63,8 @@ async function loadCharacter(source='character.json'){const load=++evidenceLoad;
  if(load!==evidenceLoad)return;characterData=captured;
  if(!characterData){$('#character-panel').innerHTML='<p class="empty">No character capture in this export. Run /api character in game and import the combined SavedVariables file.</p>';return;}
  evidence=characterData.queries.map((q,index)=>({...q,index}));
+ // Until the explorer loads the catalog, name the client from the character capture.
+ if($('#client').dataset.source!=='catalog'){const c=characterData.client;$('#client').textContent=`Client ${c.version} / build ${c.build} / ${c.locale}`;}
  // What the symbol explorer shows about a function's captured calls.
  window.AtlasEvidence={count:path=>evidence.filter(q=>q.path===path).length,calls:path=>evidence.filter(q=>q.path===path),args:argsText,result:resultText,outcome};
  const stats=characterData.statistics;

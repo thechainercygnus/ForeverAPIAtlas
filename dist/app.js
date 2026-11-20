@@ -16,7 +16,7 @@ function filter({q,kind,scope,topic,under}){
  return rows.filter(r=>(!under||(term?r.path.startsWith(under+'.')||r.path.startsWith(under+'['):r.parent===under))&&(kind==='all'||r.kind===kind)&&(!topic||topics[topic].test(r.path))&&(scope!=='root'||/^_G\.[A-Za-z_]\w*$/.test(r.path))&&(scope!=='namespace'||/^_G\.C_\w+\./.test(r.path))&&(!term||r.path.toLowerCase().includes(term)||(r.kind==='value'&&String(r.value).toLowerCase().includes(term))));
 }
 function explorer(p){
- if(!data)return;
+ if(!data){loadCatalog();return;}
  const s=state(p);
  if($('#search').value!==s.q)$('#search').value=s.q;
  $('#scope').value=s.scope;$('#topic').value=s.topic;
@@ -71,14 +71,17 @@ $('#topic').innerHTML='<option value="">All topics</option>'+Object.keys(topics)
 $('#topic').onchange=()=>Atlas.set({topic:$('#topic').value,page:'',symbol:''});
 $('#prev').onclick=()=>Atlas.set({page:page-1||'',symbol:''});
 $('#next').onclick=()=>Atlas.set({page:page+1,symbol:''});
+// The 9.6 MB catalog loads the first time the explorer opens, not on every visit.
+let catalogLoad;
+function loadCatalog(){return catalogLoad??=init();}
 async function init(){try{
+ $('#results').innerHTML='<p class="empty loading"><progress aria-label="Loading the symbol catalog"></progress> Loading the symbol catalog (9.6 MB)…</p>';
  const response=await fetch('catalog.json');if(!response.ok)throw Error('Catalog unavailable');data=await response.json();rows=data.records.sort((a,b)=>a.path.localeCompare(b.path));
  for(const r of rows){byPath.set(r.path,r);r.parent=parentOf(r.path);if(r.parent)childCount.set(r.parent,(childCount.get(r.parent)||0)+1);}
- $('#client').textContent=`Client ${data.client.version} / build ${data.client.build} / ${data.client.locale}`;
+ $('#client').textContent=`Client ${data.client.version} / build ${data.client.build} / ${data.client.locale}`;$('#client').dataset.source='catalog';
  const labels=[['functions','Functions','Paths discovered'],['tables','Tables','Environment structure'],['values','Values','Captured primitives'],['other','Other objects','Opaque Lua types']];
  $('#metrics').innerHTML=labels.map(([k,l,n])=>`<div class="metric"><label>${l}</label><strong>${data.statistics[k].toLocaleString()}</strong><small>${n}</small></div>`).join('');
  $('#filters').innerHTML=['all','function','table','value','other'].map(k=>`<button type="button" class="filter" data-kind="${k}" aria-pressed="${k==='all'}">${k==='all'?'All symbols':k[0].toUpperCase()+k.slice(1)+'s'}</button>`).join('');
  $('#filters').onclick=e=>{const b=e.target.closest('[data-kind]');if(b)Atlas.set({kind:b.dataset.kind==='all'?'':b.dataset.kind,page:'',symbol:''});};
  Atlas.refresh();
- }catch(e){$('#client').textContent='Snapshot could not load';$('#results').innerHTML='<p class="empty">Unable to load the catalog. Refresh the page to retry.</p>';console.error(e);}}
-init();
+ }catch(e){catalogLoad=undefined;$('#results').innerHTML='<p class="empty">Unable to load the symbol catalog. Open Symbol explorer again or refresh the page to retry.</p>';console.error(e);}}
