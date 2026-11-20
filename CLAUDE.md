@@ -60,4 +60,6 @@ Hosting config is `.openai/hosting.json` (serves `dist/`). Publishing is the use
 - Changing the profile shape means a new schema version, with `profile.schema.json`,
   `PROFILE_FORMAT.md` and the tests updated together.
 - Every behaviour change gets a test.
+- The site loads nothing from third parties. Fonts are self-hosted in `dist/fonts/` (SIL OFL,
+  licenses alongside); add new weights or fonts there, not from a CDN.
 - Commits and pushes need the user's go-ahead. Work on a branch and open a PR.
