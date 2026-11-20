@@ -2,14 +2,13 @@
 let characterData, evidence = [], evidenceMatches = [], evidencePage = 0, evidenceSelected;
 const evidenceSize = 12;
 const sectionNames = {identityAndStats:'Identity & stats',stats:'Attributes',character:'Character',experience:'Experience',equipment:'Equipment',professions:'Learned professions',professionSkillLines:'Profession metadata',quests:'Quests',spells:'Spellbook entries',spellSkillLines:'Spellbook lines',reputation:'Reputation',currency:'Currency',skills:'General skills'};
+// One panel and one nav item per view, so exactly one view is ever shown and marked current.
+const views={profile:['#profile-panel','#profile-nav'],character:['#character-panel','#character-nav'],environment:['#environment-panel','#explore'],guide:['#guide-panel','#guide']};
 function showView(view){
- $('#guide-panel').hidden=true;$('#guide').classList.remove('active');
- $('#profile-panel').hidden=view!=='profile';$('#profile-nav').classList.toggle('active',view==='profile');
- $('#character-panel').hidden=view!=='character'; $('#environment-panel').hidden=view!=='environment';
- $('#character-nav').classList.toggle('active',view==='character');$('#explore').classList.toggle('active',view==='environment');
+ for(const [name,[panel,nav]] of Object.entries(views)){$(panel).hidden=name!==view;$(nav).classList.toggle('active',name===view);}
 }
 $('#character-nav').onclick=()=>showView('character');
-$('#explore').onclick=()=>{guide(false);showView('environment');};
+$('#explore').onclick=()=>showView('environment');
 $('#topics').addEventListener('click',()=>showView('environment'));
 function typed(node){
  if(node.restricted)return `[restricted ${node.type}]`;
