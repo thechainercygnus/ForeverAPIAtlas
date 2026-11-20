@@ -12,6 +12,16 @@ function typed(node){
 function publicValue(node){return node&&!node.restricted&&!node.truncated?node.value:undefined;}
 function tableValue(node,key){const e=node?.entries?.find(e=>publicValue(e.key)===key);return publicValue(e?.value);}
 function argsText(q){return q.arguments.map(typed).join(', ');}
+// A one-line summary of what a call returned; the evidence view has the full typed record.
+function resultText(q){
+ if(!q.returns)return q.error||q.serializationError||q.expansionError||(q.status==='unavailable'?'API unavailable':'No return values captured');
+ if(!q.returns.length)return 'no values';
+ // Tables show their first fields (key=value), since the field names are what API research needs.
+ const brief=n=>n.type==='table'&&!n.restricted&&!n.truncated?`{${(n.entries||[]).slice(0,4).map(e=>`${publicValue(e.key)??typed(e.key)}=${e.value.type==='table'?'{…}':typed(e.value)}`).join(', ')}${(n.entries?.length||0)>4?', …':''}}`:typed(n);
+ const text=q.returns.map(brief).join(', ');
+ return text.length>160?text.slice(0,157)+'…':text;
+}
+function outcome(q){return q.hasRestrictedValues?['RESTRICTED','value']:[q.status.toUpperCase(),q.status==='ok'?'':'other'];}
 // The evidence view's state (search, filters, page, selected call) lives in the URL; see nav.js.
 let evidenceKey;
 function evidenceLink(changes){const p=Atlas.params(),s={q:p.get('q'),section:p.get('section'),status:p.get('status'),page:p.get('page'),call:p.get('call'),...changes};return Atlas.href('evidence',s);}
@@ -32,7 +42,7 @@ Atlas.handlers.evidence=evidenceView;
 function evidenceRender(){
  $('#evidence-count').textContent=evidenceMatches.length+' calls';
  const visible=evidenceMatches.slice(evidencePage*evidenceSize,(evidencePage+1)*evidenceSize);
- $('#evidence-results').innerHTML=visible.map(q=>`<a class="row" href="${esc(evidenceLink({call:q.index}))}"${q===evidenceSelected?' aria-current="true"':''}><span class="symbol"><strong>${esc(q.path.replace(/^_G\./,''))}</strong><small>(${esc(argsText(q))}) · ${esc(sectionNames[q.section]||q.section)}</small></span><span class="kind ${q.hasRestrictedValues?'value':q.status==='ok'?'':'other'}">${q.hasRestrictedValues?'RESTRICTED':q.status.toUpperCase()}</span></a>`).join('')||'<p class="empty">No matching calls. Clear the search or change your filters.</p>';
+ $('#evidence-results').innerHTML=visible.map(q=>`<a class="row" href="${esc(evidenceLink({call:q.index}))}"${q===evidenceSelected?' aria-current="true"':''}><span class="symbol"><strong>${esc(q.path.replace(/^_G\./,''))}</strong><small>(${esc(argsText(q))}) · ${esc(sectionNames[q.section]||q.section)}</small></span><span class="kind ${outcome(q)[1]}">${outcome(q)[0]}</span></a>`).join('')||'<p class="empty">No matching calls. Clear the search or change your filters.</p>';
  $('#evidence-page').textContent=evidenceMatches.length?`${evidencePage*evidenceSize+1}–${Math.min((evidencePage+1)*evidenceSize,evidenceMatches.length)} of ${evidenceMatches.length}`:'0 calls';
  $('#evidence-prev').disabled=evidencePage===0;$('#evidence-next').disabled=(evidencePage+1)*evidenceSize>=evidenceMatches.length;
  evidenceDetail();
@@ -53,7 +63,8 @@ async function loadCharacter(source='character.json'){const load=++evidenceLoad;
  if(load!==evidenceLoad)return;characterData=captured;
  if(!characterData){$('#character-panel').innerHTML='<p class="empty">No character capture in this export. Run /api character in game and import the combined SavedVariables file.</p>';return;}
  evidence=characterData.queries.map((q,index)=>({...q,index}));
- window.AtlasEvidence={count:path=>evidence.filter(q=>q.path===path).length};
+ // What the symbol explorer shows about a function's captured calls.
+ window.AtlasEvidence={count:path=>evidence.filter(q=>q.path===path).length,calls:path=>evidence.filter(q=>q.path===path),args:argsText,result:resultText,outcome};
  const stats=characterData.statistics;
  const learned=evidence.filter(q=>q.path==='_G.GetProfessionInfo'&&q.status==='ok');
  const professions=learned.map(q=>`<div class="profession"><strong>${esc(publicValue(q.returns[0])??'Unknown')}</strong><span>${esc(publicValue(q.returns[2])??'?')} / ${esc(publicValue(q.returns[3])??'?')}</span><small>Profession index ${esc(publicValue(q.arguments[0]))}</small></div>`).join('');
