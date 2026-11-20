@@ -10,7 +10,7 @@ From the atlas checkout, with ForeverAPIExplorer beside it:
 python scripts/import_dump.py ../ForeverAPIExplorer/data/ForeverAPIExplorer-20261116-202559.lua dist/catalog.json
 ```
 
-The importer parses both SavedVariables globals without executing Lua, checks all four discovery record counts and the character status/return counts against captured statistics, and writes catalog.json plus character.json. Environment-only imports write null character evidence to prevent stale results. The character view shows observed arguments and typed returns, and distinguishes learned profession indices from broader skill-line metadata. It rejects unsupported syntax. Keep source dumps outside this site's checkout; the catalog contains all captured values, which can include addon or character state. Hosting starts private.
+The importer parses both SavedVariables globals without executing Lua, checks all four discovery record counts and the character status/return counts against captured statistics, and writes catalog.json plus character.json. Environment-only imports write null character evidence to prevent stale results. The character view shows observed arguments and typed returns, and distinguishes learned profession indices from broader skill-line metadata. It rejects unsupported syntax. Keep source dumps outside this site's checkout. The catalog contains all captured values, which can include addon or character state, and the repository is public, so everything in `dist/` is public too.
 
 Preview from this directory with `python -m http.server 8080 --directory dist` and visit localhost:8080. No install or build step is required.
 
@@ -24,4 +24,4 @@ For character extraction, add curated probes with explicit argument and return c
 
 Validation: `python scripts/test_import_dump.py` from this directory. The hosted reference includes the 0.3.0 capture: 231 calls, 230 successful, two with restricted values, one unavailable, and zero errors. Discovery remains the original partial 0.1.0 snapshot; its capture time is independent of the newer character capture.
 
-The Character profile view uses versioned normalized JSON and immutable history/evidence sidecars. Both existing character captures are retained. See [PROFILE_FORMAT.md](PROFILE_FORMAT.md) for import commands and comparison rules. Publishing includes all retained history; keep the Site private unless you intend to share those character records.
+The Character profile view uses versioned normalized JSON and immutable history/evidence sidecars. Both existing character captures are retained. See [PROFILE_FORMAT.md](PROFILE_FORMAT.md) for import commands and comparison rules. `dist/` includes all retained history (character name, GUID and every snapshot), and it is public along with the rest of the repository.

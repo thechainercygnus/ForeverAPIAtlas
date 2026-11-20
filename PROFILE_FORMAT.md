@@ -1,6 +1,6 @@
 # Character profiles and history
 
-The hosted atlas is file-based and private. It stores no database credentials and has no live game connection. Importing a file updates local artifacts; publishing updates the hosted copy.
+The atlas is file-based and public: its repository includes everything in `dist/`. It stores no database credentials and has no live game connection. Importing a file updates local artifacts; publishing updates the hosted copy.
 
 ## Import
 
@@ -38,7 +38,7 @@ Every field is an observation with `state` and an `evidence` array. States are `
 
 Evidence references contain a zero-based query index and return index, the function path, query capture time, and optionally a table field name. The profile's `evidenceFile` points to the unchanged typed character capture (with source filename attached). The site's Evidence buttons open the actual record for the selected historical snapshot.
 
-Snapshot IDs combine a hash of GUID, capture time and a content digest; filenames contain no raw GUID. The GUID still appears inside the private JSON data. Hashing excludes the copied source filename to deduplicate identical captures. Multiple captures in the same second remain distinct if their contents differ. Source dumps stay outside the site checkout.
+Snapshot IDs combine a hash of GUID, capture time and a content digest; filenames contain no raw GUID. The GUID still appears inside the JSON data. Hashing excludes the copied source filename to deduplicate identical captures. Multiple captures in the same second remain distinct if their contents differ. Source dumps stay outside the site checkout.
 
 ## Comparison semantics
 
