@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "snapshots": [
+    {
+      "snapshotId": "71195ce987f8-1794885486-1c7057bb33fc84f6",
+      "characterGUID": "Player-6933-01FD6B46",
+      "capturedAt": 1794885486,
+      "addonVersion": "0.2.0",
+      "source": "ForeverAPIExplorer-20261116-201908.lua",
+      "name": "Ett",
+      "profileFile": "snapshots/71195ce987f8-1794885486-1c7057bb33fc84f6.json"
+    },
+    {
+      "snapshotId": "71195ce987f8-1794885923-dad5435daea37b27",
+      "characterGUID": "Player-6933-01FD6B46",
+      "capturedAt": 1794885923,
+      "addonVersion": "0.3.0",
+      "source": "ForeverAPIExplorer-20261116-202559.lua",
+      "name": "Ett",
+      "profileFile": "snapshots/71195ce987f8-1794885923-dad5435daea37b27.json"
+    },
+    {
+      "snapshotId": "71195ce987f8-1794887616-c4c53683004a6745",
+      "characterGUID": "Player-6933-01FD6B46",
+      "capturedAt": 1794887616,
+      "addonVersion": "0.3.0",
+      "source": "ForeverAPIExplorer-20261116-205347.lua",
+      "name": "Ett",
+      "profileFile": "snapshots/71195ce987f8-1794887616-c4c53683004a6745.json"
+    },
+    {
+      "snapshotId": "13884fdc3cda-1794887651-ab0b2105e15cd0db",
+      "characterGUID": "Player-6933-01A44764",
+      "capturedAt": 1794887651,
+      "addonVersion": "0.3.0",
+      "source": "ForeverAPIExplorer-20261116-205421.lua",
+      "name": "Lilalx",
+      "profileFile": "snapshots/13884fdc3cda-1794887651-ab0b2105e15cd0db.json"
+    },
+    {
+      "snapshotId": "c0548bf51623-1794887685-d87628c93cc05240",
+      "characterGUID": "Player-6933-00D68A8F",
+      "capturedAt": 1794887685,
+      "addonVersion": "0.3.0",
+      "source": "ForeverAPIExplorer-20261116-205457.lua",
+      "name": "Brumboldt",
+      "profileFile": "snapshots/c0548bf51623-1794887685-d87628c93cc05240.json"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Forever character snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "snapshotId", "characterGUID", "capturedAt", "captureStartedAt", "addonVersion", "client", "source", "evidenceFile", "sections", "limitations"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "snapshotId": {"type": "string", "minLength": 1},
+    "characterGUID": {"type": "string", "minLength": 1},
+    "capturedAt": {"type": "integer"},
+    "captureStartedAt": {"type": "integer"},
+    "addonVersion": {"type": "string"},
+    "client": {"type": "object"},
+    "source": {"type": "string"},
+    "evidenceFile": {"type": "string"},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "sections": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity", "stats", "equipment", "professions", "spells", "quests", "reputation"],
+      "properties": {
+        "identity": {"$ref": "#/$defs/section"}, "stats": {"$ref": "#/$defs/section"},
+        "equipment": {"$ref": "#/$defs/section"}, "professions": {"$ref": "#/$defs/section"},
+        "spells": {"$ref": "#/$defs/section"}, "quests": {"$ref": "#/$defs/section"},
+        "reputation": {"$ref": "#/$defs/section"}
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["queryIndex", "returnIndex", "functionPath", "capturedAt"],
+      "properties": {
+        "queryIndex": {"type": "integer", "minimum": 0},
+        "returnIndex": {"type": "integer", "minimum": 0},
+        "functionPath": {"type": "string"}, "capturedAt": {"type": "integer"},
+        "tableField": {"type": "string"}
+      }
+    },
+    "observation": {
+      "type": "object", "additionalProperties": false, "required": ["state", "evidence"],
+      "properties": {
+        "state": {"enum": ["value", "empty", "restricted", "unavailable", "error", "notCaptured", "partial"]},
+        "value": {"type": ["string", "number", "boolean"]},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}}
+      },
+      "allOf": [{"if": {"properties": {"state": {"const": "value"}}},
+                 "then": {"required": ["value"]}, "else": {"not": {"required": ["value"]}}}]
+    },
+    "fields": {"type": "object", "additionalProperties": {"$ref": "#/$defs/observation"}},
+    "section": {
+      "type": "object", "additionalProperties": false, "required": ["fields", "entries", "coverage"],
+      "properties": {
+        "fields": {"$ref": "#/$defs/fields"},
+        "coverage": {"const": "observedOnly"},
+        "entries": {"type": "object", "additionalProperties": {
+          "type": "object", "additionalProperties": false, "required": ["fields"],
+          "properties": {"fields": {"$ref": "#/$defs/fields"}}
+        }}
+      }
+    }
+  }
+}

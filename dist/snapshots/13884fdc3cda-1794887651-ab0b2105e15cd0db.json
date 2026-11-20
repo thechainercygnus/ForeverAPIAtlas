@@ -1,0 +1,4036 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "13884fdc3cda-1794887651-ab0b2105e15cd0db",
+  "characterGUID": "Player-6933-01A44764",
+  "capturedAt": 1794887651,
+  "captureStartedAt": 1794887651,
+  "addonVersion": "0.3.0",
+  "client": {
+    "locale": "enUS",
+    "buildDate": "Nov 12 2026",
+    "version": "1.60.1",
+    "interface": 16001,
+    "build": "70938"
+  },
+  "source": "ForeverAPIExplorer-20261116-205421.lua",
+  "evidenceFile": "snapshots/13884fdc3cda-1794887651-ab0b2105e15cd0db.evidence.json",
+  "sections": {
+    "identity": {
+      "fields": {
+        "guid": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 1,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitGUID",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "Player-6933-01A44764"
+        },
+        "name": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 0,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitName",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "Lilalx"
+        },
+        "realm": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 22,
+              "returnIndex": 0,
+              "functionPath": "_G.GetRealmName",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "CAMWOW US2 Realm 7 PvE"
+        },
+        "level": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 2,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitLevel",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 10
+        },
+        "class": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 3,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitClass",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "Priest"
+        },
+        "classToken": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 3,
+              "returnIndex": 1,
+              "functionPath": "_G.UnitClass",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "PRIEST"
+        },
+        "race": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 4,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitRace",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "Dwarf"
+        },
+        "faction": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 6,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitFactionGroup",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "Alliance"
+        },
+        "sex": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 5,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitSex",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 2
+        }
+      },
+      "entries": {},
+      "coverage": "observedOnly"
+    },
+    "stats": {
+      "fields": {
+        "health": {
+          "state": "restricted",
+          "evidence": [
+            {
+              "queryIndex": 7,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitHealth",
+              "capturedAt": 1794887651
+            }
+          ]
+        },
+        "maxHealth": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 8,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitHealthMax",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 217
+        },
+        "power": {
+          "state": "restricted",
+          "evidence": [
+            {
+              "queryIndex": 10,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitPower",
+              "capturedAt": 1794887651
+            }
+          ]
+        },
+        "maxPower": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 11,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitPowerMax",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 412
+        },
+        "powerType": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 9,
+              "returnIndex": 1,
+              "functionPath": "_G.UnitPowerType",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": "MANA"
+        },
+        "xp": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 28,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitXP",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 414
+        },
+        "maxXP": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 29,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitXPMax",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 7600
+        },
+        "restedXP": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 24,
+              "returnIndex": 0,
+              "functionPath": "_G.GetXPExhaustion",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 1514
+        },
+        "moneyCopper": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 23,
+              "returnIndex": 0,
+              "functionPath": "_G.GetMoney",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 801
+        },
+        "armorBase": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 12,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitArmor",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 0
+        },
+        "armorEffective": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 12,
+              "returnIndex": 1,
+              "functionPath": "_G.UnitArmor",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 73
+        },
+        "attackPowerBase": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 13,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitAttackPower",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 14
+        },
+        "strength": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 17,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitStat",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 24
+        },
+        "agility": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 18,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitStat",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 18
+        },
+        "stamina": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 19,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitStat",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 26
+        },
+        "intellect": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 20,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitStat",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 32
+        },
+        "spirit": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 21,
+              "returnIndex": 0,
+              "functionPath": "_G.UnitStat",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 34
+        }
+      },
+      "entries": {},
+      "coverage": "observedOnly"
+    },
+    "equipment": {
+      "fields": {},
+      "entries": {
+        "1": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 30,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 31,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 33,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 34,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 34,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "2": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 35,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 36,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 38,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 39,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 39,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "3": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 40,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 41,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 43,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 44,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 44,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "4": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 45,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 53
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 46,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:53::::::::10:1487::75:::::::|h[Neophyte's Shirt]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 48,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 49,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 49,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "5": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 50,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 16605
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 51,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ2:|Hitem:16605::::::::10:1487::11:::::::|h[Friar's Robes of the Light]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 53,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 2
+            },
+            "durability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 54,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 26
+            },
+            "maxDurability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 54,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 40
+            }
+          }
+        },
+        "6": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 55,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 56,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 58,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 59,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 59,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "7": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 60,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 79
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 61,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:79::::::::10:1487::11:::::::|h[Dwarven Cloth Britches]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 63,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 64,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 22
+            },
+            "maxDurability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 64,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 30
+            }
+          }
+        },
+        "8": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 65,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 6173
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 66,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:6173::::::::10:1487::11:::::::|h[Snow Boots]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 68,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 69,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 16
+            },
+            "maxDurability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 69,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 20
+            }
+          }
+        },
+        "9": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 70,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 71,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 73,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 74,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 74,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "10": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 75,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 719
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 76,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:719::::::::10:1487::11:::::::|h[Rabbit Handler Gloves]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 78,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 79,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 11
+            },
+            "maxDurability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 79,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 14
+            }
+          }
+        },
+        "11": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 80,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 286737
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 81,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:286737::::::::10:1487::11:::::::|h[Avala's Binding]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 83,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 84,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 84,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "12": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 85,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 86,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 88,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 89,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 89,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "13": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 90,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 91,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 93,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 94,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 94,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "14": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 95,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 96,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 98,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 99,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 99,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "15": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 100,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1376
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 101,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ0:|Hitem:1376::::::::10:1487:::::::::|h[Frayed Cloak]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 103,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 0
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 104,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 104,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "16": {
+          "fields": {
+            "itemID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 105,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 2048
+            },
+            "link": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 106,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "|cnIQ1:|Hitem:2048::::::::10:1487::11:::::::|h[Anvilmar Hammer]|h|r"
+            },
+            "quality": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 108,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 1
+            },
+            "durability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 109,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 27
+            },
+            "maxDurability": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 109,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 30
+            }
+          }
+        },
+        "17": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 110,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 111,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 113,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 114,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 114,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "18": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 115,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 116,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 118,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 119,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 119,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        },
+        "19": {
+          "fields": {
+            "itemID": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 120,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemID",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "link": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 121,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemLink",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "quality": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 123,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemQuality",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "durability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 124,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            },
+            "maxDurability": {
+              "state": "empty",
+              "evidence": [
+                {
+                  "queryIndex": 124,
+                  "returnIndex": 1,
+                  "functionPath": "_G.GetInventoryItemDurability",
+                  "capturedAt": 1794887651
+                }
+              ]
+            }
+          }
+        }
+      },
+      "coverage": "observedOnly"
+    },
+    "professions": {
+      "fields": {
+        "reportedProfessionCount": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 26,
+              "returnIndex": 0,
+              "functionPath": "_G.GetProfessions",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 5
+        }
+      },
+      "entries": {
+        "197": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 130,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "Tailoring"
+            },
+            "rank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 130,
+                  "returnIndex": 2,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 91
+            },
+            "maxRank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 130,
+                  "returnIndex": 3,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 150
+            },
+            "skillLineID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 130,
+                  "returnIndex": 6,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 197
+            }
+          }
+        },
+        "333": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 131,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "Enchanting"
+            },
+            "rank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 131,
+                  "returnIndex": 2,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 4
+            },
+            "maxRank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 131,
+                  "returnIndex": 3,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 75
+            },
+            "skillLineID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 131,
+                  "returnIndex": 6,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 333
+            }
+          }
+        },
+        "129": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 132,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "First Aid"
+            },
+            "rank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 132,
+                  "returnIndex": 2,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 14
+            },
+            "maxRank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 132,
+                  "returnIndex": 3,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 75
+            },
+            "skillLineID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 132,
+                  "returnIndex": 6,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 129
+            }
+          }
+        },
+        "356": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 133,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "Fishing"
+            },
+            "rank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 133,
+                  "returnIndex": 2,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 20
+            },
+            "maxRank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 133,
+                  "returnIndex": 3,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 75
+            },
+            "skillLineID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 133,
+                  "returnIndex": 6,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 356
+            }
+          }
+        },
+        "185": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 134,
+                  "returnIndex": 0,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": "Cooking"
+            },
+            "rank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 134,
+                  "returnIndex": 2,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 19
+            },
+            "maxRank": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 134,
+                  "returnIndex": 3,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 75
+            },
+            "skillLineID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 134,
+                  "returnIndex": 6,
+                  "functionPath": "_G.GetProfessionInfo",
+                  "capturedAt": 1794887651
+                }
+              ],
+              "value": 185
+            }
+          }
+        }
+      },
+      "coverage": "observedOnly"
+    },
+    "spells": {
+      "fields": {
+        "enumeratedLineCount": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 129,
+              "returnIndex": 0,
+              "functionPath": "_G.C_SpellBook.GetNumSpellBookSkillLines",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 4
+        }
+      },
+      "entries": {
+        "6603": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 173,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Attack"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 173,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 6603
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 173,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": ""
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 173,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 173,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 133057
+            }
+          }
+        },
+        "2481": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 175,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Find Treasure"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 175,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 2481
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 175,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Racial"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 175,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 175,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135725
+            }
+          }
+        },
+        "5019": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 177,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Shoot"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 177,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 5019
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 177,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": ""
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 177,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 177,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 132317
+            }
+          }
+        },
+        "20594": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 179,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Stoneform"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 179,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 20594
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 179,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Racial"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 179,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 179,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 136225
+            }
+          }
+        },
+        "1293712": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 181,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Armor Proficiency"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 181,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 1293712
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 181,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": ""
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 181,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": true
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 181,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 132740
+            }
+          }
+        },
+        "1259719": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 183,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Artisan's Precision"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 183,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 1259719
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 183,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Racial Passive"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 183,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": true
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 183,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 133046
+            }
+          }
+        },
+        "1259721": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 185,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Big Game Hunter"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 185,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 1259721
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 185,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Racial Passive"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 185,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": true
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 185,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135614
+            }
+          }
+        },
+        "81": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 187,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Dodge"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 187,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 81
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 187,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Passive"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 187,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": true
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 187,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 136047
+            }
+          }
+        },
+        "1293657": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 189,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Languages"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 189,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 1293657
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 189,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": ""
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 189,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": true
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 189,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 134331
+            }
+          }
+        },
+        "13908": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 191,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Desperate Prayer"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 191,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 13908
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 191,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 191,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 191,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135954
+            }
+          }
+        },
+        "2050": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 193,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Lesser Heal"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 193,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 2050
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 193,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 193,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 193,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135929
+            }
+          }
+        },
+        "2052": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 195,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Lesser Heal"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 195,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 2052
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 195,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 2"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 195,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 195,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135929
+            }
+          }
+        },
+        "139": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 197,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Renew"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 197,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 139
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 197,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 197,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 197,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135953
+            }
+          }
+        },
+        "2006": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 199,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Resurrection"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 199,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 2006
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 199,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 199,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 199,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135955
+            }
+          }
+        },
+        "585": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 201,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Smite"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 201,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 585
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 201,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 201,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 201,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135924
+            }
+          }
+        },
+        "591": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 203,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Smite"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 203,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 591
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 203,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 2"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 203,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 203,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135924
+            }
+          }
+        },
+        "586": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 205,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Fade"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 205,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 586
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 205,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 205,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 205,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135994
+            }
+          }
+        },
+        "589": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 207,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Shadow Word: Pain"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 207,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 589
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 207,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 207,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 207,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 136207
+            }
+          }
+        },
+        "1243": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 209,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Power Word: Fortitude"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 209,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 1243
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 209,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 209,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 209,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135987
+            }
+          }
+        },
+        "17": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 211,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Power Word: Shield"
+            },
+            "spellID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 211,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "spellID"
+                }
+              ],
+              "value": 17
+            },
+            "subName": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 211,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "subName"
+                }
+              ],
+              "value": "Rank 1"
+            },
+            "isPassive": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 211,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "isPassive"
+                }
+              ],
+              "value": false
+            },
+            "iconID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 211,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_SpellBook.GetSpellBookItemInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "iconID"
+                }
+              ],
+              "value": 135940
+            }
+          }
+        }
+      },
+      "coverage": "observedOnly"
+    },
+    "quests": {
+      "fields": {
+        "enumeratedLineCount": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 125,
+              "returnIndex": 0,
+              "functionPath": "_G.C_QuestLog.GetNumQuestLogEntries",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 9
+        }
+      },
+      "entries": {
+        "287": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 156,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "Frostmane Hold"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 156,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 287
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 156,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 9
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 156,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 9
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 156,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "315": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 157,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "The Perfect Stout"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 157,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 315
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 157,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 9
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 157,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 9
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 157,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "95212": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 158,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "Never Saddle on Quality"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 158,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 95212
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 158,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 10
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 158,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 10
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 158,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "314": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 159,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "Protecting the Herd"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 159,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 314
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 159,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 12
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 159,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 12
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 159,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "312": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 160,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "Tundra MacGrann's Stolen Stash"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 160,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 312
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 160,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 12
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 160,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 12
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 160,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "96408": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 161,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "A Visitor to Dun Morogh"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 161,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 96408
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 161,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 13
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 161,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 13
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 161,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        },
+        "96047": {
+          "fields": {
+            "title": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 163,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "title"
+                }
+              ],
+              "value": "Camping 101: First Aid"
+            },
+            "questID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 163,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "questID"
+                }
+              ],
+              "value": 96047
+            },
+            "level": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 163,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "level"
+                }
+              ],
+              "value": 6
+            },
+            "difficultyLevel": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 163,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "difficultyLevel"
+                }
+              ],
+              "value": 6
+            },
+            "frequency": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 163,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_QuestLog.GetInfo",
+                  "capturedAt": 1794887651,
+                  "tableField": "frequency"
+                }
+              ],
+              "value": 0
+            }
+          }
+        }
+      },
+      "coverage": "observedOnly"
+    },
+    "reputation": {
+      "fields": {
+        "enumeratedLineCount": {
+          "state": "value",
+          "evidence": [
+            {
+              "queryIndex": 127,
+              "returnIndex": 0,
+              "functionPath": "_G.C_Reputation.GetNumFactions",
+              "capturedAt": 1794887651
+            }
+          ],
+          "value": 5
+        }
+      },
+      "entries": {
+        "69": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Darnassus"
+            },
+            "factionID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "factionID"
+                }
+              ],
+              "value": 69
+            },
+            "currentStanding": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentStanding"
+                }
+              ],
+              "value": 3137
+            },
+            "reaction": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "reaction"
+                }
+              ],
+              "value": 5
+            },
+            "currentReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentReactionThreshold"
+                }
+              ],
+              "value": 3000
+            },
+            "nextReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 165,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "nextReactionThreshold"
+                }
+              ],
+              "value": 9000
+            }
+          }
+        },
+        "54": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Gnomeregan Exiles"
+            },
+            "factionID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "factionID"
+                }
+              ],
+              "value": 54
+            },
+            "currentStanding": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentStanding"
+                }
+              ],
+              "value": 5628
+            },
+            "reaction": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "reaction"
+                }
+              ],
+              "value": 5
+            },
+            "currentReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentReactionThreshold"
+                }
+              ],
+              "value": 3000
+            },
+            "nextReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 166,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "nextReactionThreshold"
+                }
+              ],
+              "value": 9000
+            }
+          }
+        },
+        "47": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Ironforge"
+            },
+            "factionID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "factionID"
+                }
+              ],
+              "value": 47
+            },
+            "currentStanding": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentStanding"
+                }
+              ],
+              "value": 6528
+            },
+            "reaction": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "reaction"
+                }
+              ],
+              "value": 5
+            },
+            "currentReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentReactionThreshold"
+                }
+              ],
+              "value": 3000
+            },
+            "nextReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 167,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "nextReactionThreshold"
+                }
+              ],
+              "value": 9000
+            }
+          }
+        },
+        "72": {
+          "fields": {
+            "name": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "name"
+                }
+              ],
+              "value": "Stormwind"
+            },
+            "factionID": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "factionID"
+                }
+              ],
+              "value": 72
+            },
+            "currentStanding": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentStanding"
+                }
+              ],
+              "value": 3137
+            },
+            "reaction": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "reaction"
+                }
+              ],
+              "value": 5
+            },
+            "currentReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "currentReactionThreshold"
+                }
+              ],
+              "value": 3000
+            },
+            "nextReactionThreshold": {
+              "state": "value",
+              "evidence": [
+                {
+                  "queryIndex": 168,
+                  "returnIndex": 0,
+                  "functionPath": "_G.C_Reputation.GetFactionDataByIndex",
+                  "capturedAt": 1794887651,
+                  "tableField": "nextReactionThreshold"
+                }
+              ],
+              "value": 9000
+            }
+          }
+        }
+      },
+      "coverage": "observedOnly"
+    }
+  },
+  "limitations": [
+    "Collections are observed subsets; missing entries are never confirmed removals.",
+    "An empty equipment result is an observed empty result, not proof of unequipping.",
+    "Profile mappings cover modern structured collections; unmapped calls remain in raw evidence.",
+    "Spell entries represent spellbook entries including individual ranks.",
+    "Capture is not atomic; unavailable context and cache state may affect results."
+  ]
+}
