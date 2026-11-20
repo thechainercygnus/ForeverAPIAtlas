@@ -50,4 +50,4 @@ jobs:
       - name: Importer tests
         run: python test_import_dump.py -v
       - name: Compare tests
-        run: node --test test_compare.mjs
+        run: node --test test_compare.mjs test_items.mjs

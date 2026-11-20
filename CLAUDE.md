@@ -20,7 +20,7 @@ Run from `scripts/`:
 
 ```
 python test_profiles.py
-node --test test_compare.mjs
+node --test test_compare.mjs test_items.mjs
 python test_import_dump.py
 ```
 

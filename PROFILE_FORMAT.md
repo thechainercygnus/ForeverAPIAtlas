@@ -69,7 +69,7 @@ Download a comparison from the website or generate the same JSON locally with `n
 ```powershell
 python scripts/test_import_dump.py
 python scripts/test_profiles.py
-node --test scripts/test_compare.mjs
+node --test scripts/test_compare.mjs scripts/test_items.mjs
 python ../ForeverAPIExplorer/tests/test_extended_capture.py
 ```
 
