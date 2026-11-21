@@ -1,6 +1,7 @@
 # The container image that runs at atlas.durishlabs.com (roadmap #33).
-# Pull requests build and smoke-test it; pushes to main and stable vX.Y.Z tags publish it to GHCR.
-# Deploying a published image is the user's step (see the README's Deploy section).
+# Pull requests and pushes to main build and smoke-test it. Only a release publishes it: a stable
+# vX.Y.Z tag publishes X.Y.Z, X.Y and latest to GHCR, the same scheme as the Character Planner.
+# No per-commit images. Tagging and deploying are the user's call (see the README).
 name: image
 
 on:
@@ -48,7 +49,7 @@ jobs:
 
   publish:
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.ref_type == 'tag'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -64,20 +65,20 @@ jobs:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           image="ghcr.io/${GITHUB_REPOSITORY,,}"
-          tags=("$GITHUB_SHA")
-          if [[ "$GITHUB_REF_TYPE" == tag ]]; then
-            if [[ ! "$GITHUB_REF_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
-              echo "::error::Use a stable SemVer Git tag such as v1.0.0."
-              exit 1
-            fi
-            tags+=("${GITHUB_REF_NAME#v}" latest)
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::Use a stable SemVer Git tag such as v1.0.0."
+            exit 1
           fi
-          docker build --label "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" --tag "$image:$GITHUB_SHA" .
+          version="${GITHUB_REF_NAME#v}"
+          tags=("$version" "${version%.*}" latest) # 1.2.3, 1.2 and latest
+          docker build \
+            --label "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.version=${version}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            --tag "$image:$version" .
           printf '%s' "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
           for tag in "${tags[@]}"; do
-            if [[ "$tag" != "$GITHUB_SHA" ]]; then
-              docker tag "$image:$GITHUB_SHA" "$image:$tag"
-            fi
+            [[ "$tag" == "$version" ]] || docker tag "$image:$version" "$image:$tag"
             docker push "$image:$tag"
             printf 'Published `%s:%s`\n\n' "$image" "$tag" >> "$GITHUB_STEP_SUMMARY"
           done
