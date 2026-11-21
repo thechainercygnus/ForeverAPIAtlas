@@ -60,7 +60,8 @@ Container (what atlas.durishlabs.com runs, roadmap #33): `docker build -t atlas-
 server's). Check a change under the real CSP in the container, not only with `http.server`:
 anything new loaded from another origin, or inline, needs the CSP changed on purpose.
 
-Hosting config is `.openai/hosting.json` (serves `dist/`). Publishing is the user's call.
+The site is live at https://atlas.durishlabs.com/, run from released images (see the README's "Host it
+at atlas.durishlabs.com"). Releasing and deploying are the user's call.
 
 ## Rules
 
