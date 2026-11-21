@@ -37,11 +37,8 @@ jobs:
           header() { curl -fsI -H 'Accept-Encoding: gzip' "http://127.0.0.1:8080$1" | tr -d '\r' | grep -i "^$2:" | cut -d' ' -f2-; }
           [[ "$(header / content-type)" == text/html* ]] || fail "index.html isn't served as HTML"
           [[ "$(header /compare.mjs content-type)" == text/javascript* ]] || fail ".mjs isn't served as text/javascript"
-          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 content-type)" == font/woff2 ]] || fail ".woff2 isn't served as font/woff2"
           [[ "$(header / content-security-policy)" == *"script-src 'self'"* ]] || fail "the Content-Security-Policy is missing"
-          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 content-security-policy)" == *"default-src 'none'"* ]] || fail "fonts lost the security headers"
           [[ "$(header /catalog.json content-encoding)" == gzip ]] || fail "catalog.json isn't served compressed"
-          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 cache-control)" == *immutable* ]] || fail "fonts aren't cached as immutable"
           [[ "$(header /app.js cache-control)" == no-cache ]] || fail "scripts aren't revalidated"
           status=$(curl -s -o page.html -w '%{http_code}' http://127.0.0.1:8080/no/such/page)
           [[ "$status" == 404 ]] && grep -q 'Nothing at this path' page.html || fail "missing paths don't get the 404 page"

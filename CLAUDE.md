@@ -19,6 +19,7 @@ Character Planner's job (#18). Don't add progress or value-change features here.
 Run from `scripts/`:
 
 ```
+python test_design.py
 python test_profiles.py
 node --test test_compare.mjs test_items.mjs
 python test_import_dump.py
@@ -76,6 +77,6 @@ at atlas.durishlabs.com"). Releasing and deploying are the user's call.
 - Changing the profile shape means a new schema version, with `profile.schema.json`,
   `PROFILE_FORMAT.md` and the tests updated together.
 - Every behaviour change gets a test.
-- The site loads nothing from third parties. Fonts are self-hosted in `dist/fonts/` (SIL OFL,
-  licenses alongside); add new weights or fonts there, not from a CDN.
+- The site uses system fonts and loads nothing from third parties. Follow the shared
+  design spec in DurishLabsPortfolio/DESIGN.md.
 - Commits and pushes need the user's go-ahead. Work on a branch and open a PR.
