@@ -54,6 +54,9 @@ each job only the permissions it needs.
 Import a capture: `python scripts/import_dump.py ../ForeverAPIExplorer/data/<dump>.lua dist/catalog.json`.
 Rebuild all profiles: `python scripts/build_profiles.py ../ForeverAPIExplorer/data dist`.
 Preview: `python -m http.server 8080 --bind 127.0.0.1 --directory dist`.
+README screenshot (#45): `uv run --with playwright==1.64.1 python scripts/screenshot.py` retakes
+`screenshots/symbol-explorer.webp` (outside `dist/`, so the site doesn't ship it); rerun it after a
+visible change to the explorer. The portfolio copies it.
 Container (what atlas.durishlabs.com runs, roadmap #33): `docker build -t atlas-test .` then
 `docker run --rm -p 127.0.0.1:8090:80 atlas-test`. `nginx.conf` serves `dist/`;
 `security-headers.conf` holds the CSP and security headers and must be included in every

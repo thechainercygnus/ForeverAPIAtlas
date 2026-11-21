@@ -2,6 +2,12 @@
 
 A buildless, snapshot-driven Lua environment reference. There is no live game connection and no inferred function signature database. Topic filters identify research leads by name only. This is deliberately not an OpenAPI document: the source describes Lua symbols, not HTTP operations.
 
+Live at <https://atlas.durishlabs.com/>.
+
+![The symbol explorer with UnitStat open: the results list on the left, and on the right its five captured calls, UnitStat("player", 1) to 4, each returning its stat values](screenshots/symbol-explorer.webp)
+
+Retake the screenshot after a visible change to the explorer, with `uv run --with playwright==1.64.1 python scripts/screenshot.py` (first time: `uv run --with playwright==1.64.1 playwright install chromium`). It serves `dist/` locally and installs nothing into the repo. The portfolio at durishlabs.com copies it.
+
 ## Refresh the catalog
 
 From the atlas checkout, with ForeverAPIExplorer beside it:
