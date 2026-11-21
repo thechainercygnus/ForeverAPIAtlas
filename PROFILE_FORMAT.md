@@ -1,6 +1,6 @@
 # API coverage, profiles and history
 
-The atlas is file-based and public: its repository includes everything in `dist/`. It stores no database credentials and has no live game connection. Importing a file updates local artifacts; publishing updates the hosted copy.
+The atlas is file-based and public: its repository includes everything in `dist/`. It stores no database credentials and has no live game connection. Importing a file updates local artifacts; a release publishes them to https://atlas.durishlabs.com/ (see the README's "Host it at atlas.durishlabs.com").
 
 ## Import
 
