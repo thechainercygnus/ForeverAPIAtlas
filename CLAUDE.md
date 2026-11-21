@@ -40,10 +40,11 @@ GitHub Actions in `.github/workflows/`, on pushes to `main` and on pull requests
   GitHub's default CodeQL setup must stay off.
 - `dependency-review`: fails a PR that adds a dependency with a high or critical
   vulnerability or a non-permissive license (`.github/dependency-review-config.yml`).
-- `image` (`publish-image.yaml`): on pull requests, builds the container and smoke-tests it
-  (types, CSP and security headers, compression, caching, the 404 page). Pushes to `main`
-  publish `ghcr.io/thechainercygnus/foreverapiatlas:<commit SHA>`; stable `vX.Y.Z` tags also
-  publish `X.Y.Z` and `latest`. Tagging and deploying are the user's call.
+- `image` (`publish-image.yaml`): on pull requests and pushes to `main`, builds the container
+  and smoke-tests it (types, CSP and security headers, compression, caching, the 404 page).
+  Only a stable `vX.Y.Z` tag publishes, as `X.Y.Z`, `X.Y` and `latest`: the user's standard
+  is SemVer releases and `latest`, never per-commit images. Tagging and deploying are the
+  user's call.
 
 Actions are pinned to full commit SHAs with the version in a comment; Dependabot
 (`.github/dependabot.yml`) updates them and the nginx base image weekly. Keep new actions pinned the same way and give
