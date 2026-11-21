@@ -1,0 +1,13 @@
+services:
+  atlas:
+    image: ${ATLAS_IMAGE:?Set ATLAS_IMAGE to the GHCR image reference}
+    restart: unless-stopped
+    networks:
+      caddy:
+        aliases:
+          - durishlabs-atlas
+
+networks:
+  caddy:
+    external: true
+    name: ${CADDY_NETWORK:-caddy}

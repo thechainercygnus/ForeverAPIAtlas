@@ -1,0 +1,7 @@
+# Only what the image needs: the site and the nginx config.
+*
+!Dockerfile
+!nginx.conf
+!security-headers.conf
+!dist/
+!dist/**

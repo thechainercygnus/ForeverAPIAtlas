@@ -48,6 +48,12 @@ each job only the permissions it needs.
 Import a capture: `python scripts/import_dump.py ../ForeverAPIExplorer/data/<dump>.lua dist/catalog.json`.
 Rebuild all profiles: `python scripts/build_profiles.py ../ForeverAPIExplorer/data dist`.
 Preview: `python -m http.server 8080 --bind 127.0.0.1 --directory dist`.
+Container (what atlas.durishlabs.com runs, roadmap #33): `docker build -t atlas-test .` then
+`docker run --rm -p 127.0.0.1:8090:80 atlas-test`. `nginx.conf` serves `dist/`;
+`security-headers.conf` holds the CSP and security headers and must be included in every
+`location` that sets its own headers (a location with any `add_header` stops inheriting the
+server's). Check a change under the real CSP in the container, not only with `http.server`:
+anything new loaded from another origin, or inline, needs the CSP changed on purpose.
 
 Hosting config is `.openai/hosting.json` (serves `dist/`). Publishing is the user's call.
 
