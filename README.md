@@ -20,14 +20,14 @@ The public site runs as a static nginx container on the VPS, behind the Caddy in
 
 ### Images
 
-`.github/workflows/publish-image.yaml` builds and smoke-tests the image on every pull request. On a push to `main` it publishes `ghcr.io/thechainercygnus/foreverapiatlas:<full commit SHA>`; the run summary lists the reference. For a release, tag the commit you want to ship:
+Images are published only for releases, with SemVer tags and `latest`, the same scheme as the Character Planner. `.github/workflows/publish-image.yaml` builds and smoke-tests the image on every pull request and push to `main`, but publishes nothing for those. To release, tag the merge commit on `main` with a stable `vX.Y.Z` and push the tag:
 
 ```sh
-git tag v1.0.0
+git tag -a v1.0.0 -m "v1.0.0"
 git push origin v1.0.0
 ```
 
-That run also publishes `1.0.0` and `latest`. Deploy a specific SHA or version, not `latest`, so a deploy or rollback is predictable.
+That run publishes `ghcr.io/thechainercygnus/foreverapiatlas` as `1.0.0`, `1.0` and `latest`, and the run summary lists them. Deploy `latest`; to hold a version or roll back, use its `X.Y.Z` tag. Pre-release and other tags are rejected. Use a new version for every release; a tag isn't reused.
 
 The GHCR package is private by default. Check under **Packages** on GitHub that it's private (or make it public if you prefer) and that the account the VPS uses can read it.
 
@@ -44,7 +44,7 @@ unset ghcr_token
 
 #### Caddy in Docker
 
-1. Copy `compose.yaml` to its own directory on the VPS (not the portfolio's). In a `.env` file beside it, set `ATLAS_IMAGE` to the image reference from the Actions run summary, for example `ATLAS_IMAGE=ghcr.io/thechainercygnus/foreverapiatlas:<full commit SHA>`. If Caddy's Docker network isn't named `caddy`, also set `CADDY_NETWORK`.
+1. Copy `compose.yaml` to its own directory on the VPS (not the portfolio's). In a `.env` file beside it, set `ATLAS_IMAGE=ghcr.io/thechainercygnus/foreverapiatlas:latest`. If Caddy's Docker network isn't named `caddy`, also set `CADDY_NETWORK`.
 2. Run `docker compose up -d --pull always` in that directory. The container joins Caddy's network as `durishlabs-atlas` and publishes no host port.
 3. Add this block to the Caddyfile, then validate and reload Caddy as you usually do:
 
@@ -59,7 +59,7 @@ unset ghcr_token
 Instead of the Compose steps, run the container on a loopback port (8089 here; pick another if it's taken, such as by the portfolio's 8088):
 
 ```sh
-ATLAS_IMAGE=ghcr.io/thechainercygnus/foreverapiatlas:FULL_COMMIT_SHA
+ATLAS_IMAGE=ghcr.io/thechainercygnus/foreverapiatlas:latest
 docker pull "$ATLAS_IMAGE"
 docker run -d --restart unless-stopped --name durishlabs-atlas -p 127.0.0.1:8089:80 "$ATLAS_IMAGE"
 ```
@@ -82,14 +82,14 @@ Expect `200` with the CSP and HSTS headers, the catalog with `content-encoding: 
 
 ### Update or roll back
 
-Set `ATLAS_IMAGE` to the image you want (a newer SHA, or an older one to roll back) and repeat `docker compose up -d --pull always`. With the host-port setup, pull the new image, stop and remove the `durishlabs-atlas` container, and repeat `docker run`. Visitors pick up the change on their next load, because pages, scripts and data are revalidated on every request.
+To update to a new release, repeat `docker compose up -d --pull always`: with `ATLAS_IMAGE` on `latest`, `--pull always` fetches the new release. To roll back, set `ATLAS_IMAGE` to an earlier release's `X.Y.Z` tag (for example `ghcr.io/thechainercygnus/foreverapiatlas:1.0.0`) and run the same command; set it back to `latest` once a fixed release is out. With the host-port setup, `docker pull` the image, stop and remove the `durishlabs-atlas` container, and repeat `docker run`. Visitors pick up the change on their next load, because pages, scripts and data are revalidated on every request.
 
 ### Publish new captures
 
 1. Import the capture (see "Refresh the catalog" above, and [PROFILE_FORMAT.md](PROFILE_FORMAT.md) for profiles).
 2. Commit it on a branch and open a pull request; CI runs the tests and smoke-tests the image.
-3. Merge. The push to `main` publishes a new image.
-4. Deploy that image's SHA as above.
+3. Merge, then tag the merge commit with the next version (a new capture is usually a minor release, `vX.Y+1.0`) and push the tag. That publishes the release and moves `latest`.
+4. Update the VPS as above.
 
 ## Evidence and next steps
 
