@@ -1,0 +1,83 @@
+# The container image that runs at atlas.durishlabs.com (roadmap #33).
+# Pull requests build and smoke-test it; pushes to main and stable vX.Y.Z tags publish it to GHCR.
+# Deploying a published image is the user's step (see the README's Deploy section).
+name: image
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build the image
+        run: docker build --tag atlas:ci .
+
+      # The checks that matter for the live site: it serves, modules run, the CSP and
+      # security headers are sent, the catalog is compressed, and missing paths get the 404 page.
+      - name: Smoke-test the container
+        shell: bash
+        run: |
+          docker run -d --name atlas -p 127.0.0.1:8080:80 atlas:ci
+          for i in $(seq 1 20); do curl -fs -o /dev/null http://127.0.0.1:8080/ && break; sleep 0.5; done
+          fail() { echo "::error::$1"; docker logs atlas; exit 1; }
+          header() { curl -fsI -H 'Accept-Encoding: gzip' "http://127.0.0.1:8080$1" | tr -d '\r' | grep -i "^$2:" | cut -d' ' -f2-; }
+          [[ "$(header / content-type)" == text/html* ]] || fail "index.html isn't served as HTML"
+          [[ "$(header /compare.mjs content-type)" == text/javascript* ]] || fail ".mjs isn't served as text/javascript"
+          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 content-type)" == font/woff2 ]] || fail ".woff2 isn't served as font/woff2"
+          [[ "$(header / content-security-policy)" == *"script-src 'self'"* ]] || fail "the Content-Security-Policy is missing"
+          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 content-security-policy)" == *"default-src 'none'"* ]] || fail "fonts lost the security headers"
+          [[ "$(header /catalog.json content-encoding)" == gzip ]] || fail "catalog.json isn't served compressed"
+          [[ "$(header /fonts/dm-sans-latin-wght-normal.woff2 cache-control)" == *immutable* ]] || fail "fonts aren't cached as immutable"
+          [[ "$(header /app.js cache-control)" == no-cache ]] || fail "scripts aren't revalidated"
+          status=$(curl -s -o page.html -w '%{http_code}' http://127.0.0.1:8080/no/such/page)
+          [[ "$status" == 404 ]] && grep -q 'Nothing at this path' page.html || fail "missing paths don't get the 404 page"
+          echo "All smoke checks passed."
+
+  publish:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build and publish to GHCR
+        shell: bash
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          image="ghcr.io/${GITHUB_REPOSITORY,,}"
+          tags=("$GITHUB_SHA")
+          if [[ "$GITHUB_REF_TYPE" == tag ]]; then
+            if [[ ! "$GITHUB_REF_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+              echo "::error::Use a stable SemVer Git tag such as v1.0.0."
+              exit 1
+            fi
+            tags+=("${GITHUB_REF_NAME#v}" latest)
+          fi
+          docker build --label "org.opencontainers.image.source=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" --tag "$image:$GITHUB_SHA" .
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          for tag in "${tags[@]}"; do
+            if [[ "$tag" != "$GITHUB_SHA" ]]; then
+              docker tag "$image:$GITHUB_SHA" "$image:$tag"
+            fi
+            docker push "$image:$tag"
+            printf 'Published `%s:%s`\n\n' "$image" "$tag" >> "$GITHUB_STEP_SUMMARY"
+          done
