@@ -12,7 +12,7 @@ python scripts/import_dump.py ../ForeverAPIExplorer/data/ForeverAPIExplorer-2026
 
 The importer parses both SavedVariables globals without executing Lua, checks all four discovery record counts and the character status/return counts against captured statistics, and writes catalog.json plus character.json. Environment-only imports write null character evidence to prevent stale results. The character view shows observed arguments and typed returns, and distinguishes learned profession indices from broader skill-line metadata. It rejects unsupported syntax. Keep source dumps outside this site's checkout. The catalog contains all captured values, which can include addon or character state, and the repository is public, so everything in `dist/` is public too.
 
-Preview from this directory with `python -m http.server 8080 --directory dist` and visit localhost:8080. No install or build step is required.
+Preview from this directory with `python -m http.server 8080 --directory dist` and visit localhost:8080. No install or build step is required. The Atlas uses system fonts and follows the [Durish Labs design spec](https://github.com/thechainercygnus/DurishLabsPortfolio/blob/main/DESIGN.md).
 
 ## Host it at atlas.durishlabs.com
 

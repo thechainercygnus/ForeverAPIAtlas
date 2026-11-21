@@ -45,6 +45,8 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/venv"
           "$RUNNER_TEMP/venv/bin/pip" install --disable-pip-version-check jsonschema==4.26.0
           echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+      - name: Shared design checks
+        run: python test_design.py -v
       - name: Profile tests
         run: python test_profiles.py -v
       - name: Importer tests
